@@ -1,12 +1,13 @@
-import { createStore, compose, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
-import { appReducer } from './appReducer';
+import { configureStore } from '@reduxjs/toolkit';
+import covidInfo from './covidInfoSlice';
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+const rootReducer = {
+  covidInfo
+}
 
-const store = createStore(
-  appReducer,
-  composeEnhancers(applyMiddleware(thunk))
-)
+const store = configureStore({
+  reducer: rootReducer,
+  devTools: process.env.NODE_ENV !== 'production'
+})
 
 export default store
