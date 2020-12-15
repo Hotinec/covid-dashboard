@@ -12,14 +12,14 @@ export const Dashboard = () => {
 
   return (
     <Grid container spacing={1}>
-      <Grid item md={2} sm={12} className={classes.item}>
+      <Grid item md={2} xs={12} className={classes.item}>
         <GlobalCases/>
         <CountriesList />
       </Grid>
-      <Grid item md={6} sm={12} className={classes.item}>
+      <Grid item md={6} xs={12} className={classes.item}>
         <Map />
       </Grid>
-      <Grid item md={4} sm={12} className={classes.item}>
+      <Grid item md={4} xs={12} className={classes.item}>
         <GlobalTable />
         <CaseChart />
       </Grid>
