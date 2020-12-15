@@ -1,16 +1,16 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles({
+export const useStyles = makeStyles((theme) => ({
   root: {
-    minWidth: 500,
-    margin: '5px 10px 5px 10px',
+    minWidth: 375,
+    margin: theme.spacing(1),
     border: '1px solid #363636',
-    borderRadius: '0',
     color: '#bdbdbd',
     backgroundColor: '#24292e',
-    height: '44px',
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
+    padding: '0 10px',
+    height: theme.spacing(7)
   },
   title: {
     fontSize: '1.6994866rem',
@@ -21,4 +21,4 @@ export const useStyles = makeStyles({
     height: '35px',
     marginRight: '25px',
   },
-});
+}));

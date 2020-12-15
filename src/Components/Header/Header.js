@@ -1,7 +1,5 @@
 import React from 'react';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
+import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import {useStyles} from './styles';
@@ -11,17 +9,17 @@ export const Header = () => {
   const classes = useStyles();
 
   return (
-    <Card className={classes.root}>
-      <CardContent>
+    <Paper className={classes.root} square>
+      <Box>
         <Box display="flex" alignItems="center">
-          <CardMedia
+          <img
             className={classes.media}
-            image={logo}
-            title='Rs School logo'
+            src={logo}
+            alt='Rs School logo'
           />
           <Typography className={classes.title}>Covid Dashboard</Typography>
         </Box>
-      </CardContent>
-    </Card>
+      </Box>
+    </Paper>
   );
 }
