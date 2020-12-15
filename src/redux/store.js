@@ -1,8 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 import covidInfo from './covidInfoSlice';
+import currentCountry from './currentCountrySlice';
 
 const rootReducer = {
-  covidInfo
+  covidInfo,
+  currentCountry
 }
 
 const store = configureStore({
