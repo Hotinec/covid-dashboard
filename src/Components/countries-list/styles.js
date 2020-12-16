@@ -2,14 +2,31 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   root: {
-    // minWidth: 275,
+    position: 'relative',
     flexGrow: '1',
     border: '1px solid #363636',
     color: '#bdbdbd',
     backgroundColor: '#24292e',
-    padding: '10px',
+    padding: '10px 0',
   },
   title: {
-    fontSize: '16px',
+    color: 'rgb(255, 255, 255)',
+    fontSize: '18px',
+    textAlign: 'center',
+    marginBottom: '20px',
   },
+  list: {
+    overflowY: 'scroll',
+    height: 330
+  },
+  divider: {
+    width: '100%',
+    backgroundColor: '#363636',
+  },
+  listItem: {
+    justifyContent: 'space-around',
+  },
+  countryName: {
+    textAlign: 'right',
+  }
 }));

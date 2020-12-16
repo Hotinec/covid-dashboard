@@ -2,6 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   root: {
+    position: 'relative',
     height: theme.spacing(10),
     marginBottom: theme.spacing(1),
     border: '1px solid #363636',
@@ -16,7 +17,7 @@ export const useStyles = makeStyles((theme) => ({
   caseTitle: {
     color: 'rgb(255, 255, 255)',
     strokeWidth: 2,
-    fontSize: 18,
+    fontSize: 14,
     lineHeight: 'normal',
   },
   caseCount: {
