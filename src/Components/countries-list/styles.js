@@ -17,7 +17,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   list: {
     overflowY: 'scroll',
-    height: 330
+    height: 400,
   },
   divider: {
     width: '100%',
@@ -28,5 +28,15 @@ export const useStyles = makeStyles((theme) => ({
   },
   countryName: {
     textAlign: 'right',
+  },
+  imageIcon: {
+    width: '100%',
+    height: '100%',
+  },
+  iconRoot: {
+    textAlign: 'center',
+  },
+  itemIcon: {
+    justifyContent: 'flex-end',
   }
 }));
