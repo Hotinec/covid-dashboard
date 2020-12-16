@@ -7,7 +7,6 @@ import Header from './Components/header';
 import Dashboard from './pages/dashboard';
 
 function App() {
-
   const dispatch = useDispatch();
   const { covidInfo } = useSelector(state => state);
 
@@ -15,7 +14,7 @@ function App() {
    dispatch(fetchCovidInfo());
  }, [dispatch]);
 
- console.log(covidInfo);
+ console.log('covid', covidInfo);
 
   return (
     <div className="App">
