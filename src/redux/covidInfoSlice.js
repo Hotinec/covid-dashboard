@@ -30,4 +30,12 @@ const covidInfoSlice = createSlice({
   },
 });
 
+export const {
+  selectById: selectCountryById,
+  selectIds: selectCountryIds,
+  selectEntities: selectCountryEntities,
+  selectAll: selectAllCountries,
+  selectTotal: selectTotalCountries
+} = countriesAdapter.getSelectors(state => state.covidInfo);
+
 export default covidInfoSlice.reducer;
