@@ -1,14 +1,37 @@
-import { set, setLoaded } from './covidInfoSlice';
-import { setCountry } from './currentCountrySlice';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import { apiRequest } from '../services/api';
 
-export const fetchCovidInfo = () => async dispatch => {
-  dispatch(setLoaded(false))
+export const fetchCovidInfo = createAsyncThunk('covidInfo/set', async () => {
   const apiResponse = await apiRequest('https://api.covid19api.com/summary');
-  dispatch(set(apiResponse));
-}
+  const additionalInfo = await apiRequest(
+    'https://restcountries.eu/rest/v2/all?fields=alpha2Code;population;flag',
+  );
 
-export const fetchCurrentCountry = (country) => async dispatch => {
-  const apiResponse = await apiRequest(`https://api.covid19api.com/country/${country}`);
-  dispatch(setCountry(apiResponse));
-}
+  const countries = apiResponse.Countries;
+  const extendCountriesList = countries.map(item => {
+    const countryId = additionalInfo.findIndex(
+      el => el.alpha2Code === item.CountryCode,
+    );
+    const extendCountry = {
+      ...item,
+      flag: additionalInfo[countryId].flag,
+      population: additionalInfo[countryId].population,
+    };
+    return extendCountry;
+  });
+  return {
+    Global: apiResponse.Global,
+    Countries: extendCountriesList,
+    Date: apiResponse.Date,
+  };
+});
+
+export const fetchCurrentCountry = createAsyncThunk(
+  'cuurentCountry/set',
+  async country => {
+    const apiResponse = await apiRequest(
+      `https://api.covid19api.com/country/${country}`,
+    );
+    return apiResponse;
+  },
+);

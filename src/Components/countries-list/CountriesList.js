@@ -18,7 +18,7 @@ export const CountriesList = () => {
   return (
     <Paper className={classes.root} square>
       {
-        isLoaded ? 
+        isLoaded === 'idle' ? 
         <Box>
           <Typography className={classes.title}>Cases by Country</Typography>
           <List className={classes.list}>
