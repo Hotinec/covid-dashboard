@@ -4,7 +4,7 @@ import { apiRequest } from '../services/api';
 export const fetchCovidInfo = createAsyncThunk('covidInfo/set', async () => {
   const apiResponse = await apiRequest('https://api.covid19api.com/summary');
   const additionalInfo = await apiRequest(
-    'https://restcountries.eu/rest/v2/all?fields=alpha2Code;population;flag',
+    'https://restcountries.eu/rest/v2/all?fields=alpha2Code;population;flag;latlng',
   );
 
   const countries = apiResponse.Countries;
@@ -16,6 +16,7 @@ export const fetchCovidInfo = createAsyncThunk('covidInfo/set', async () => {
       ...item,
       flag: additionalInfo[countryId].flag,
       population: additionalInfo[countryId].population,
+      geometry: additionalInfo[countryId].latlng
     };
     return extendCountry;
   });
