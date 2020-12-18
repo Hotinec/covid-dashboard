@@ -1,14 +1,19 @@
-import React from 'react';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import {useStyles} from './styles';
+import React from "react";
+import { GlobalCountries } from "./GlobalCountries";
+import Paper from "@material-ui/core/Paper";
+import { useStyles } from "./styles";
+import { InfoTable } from "./InfoTable";
+import { Box } from "@material-ui/core";
 
 export const GlobalTable = () => {
   const classes = useStyles();
 
   return (
-    <Paper className={classes.root} square>
-      <Typography className={classes.title}>Global Table</Typography>
+    <Paper className={classes.root} square={true}>
+      <Box display="flex" justifyContent="space-between">
+        <GlobalCountries />
+        <InfoTable />
+      </Box>
     </Paper>
   );
-}
+};
