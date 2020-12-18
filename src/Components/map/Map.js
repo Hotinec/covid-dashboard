@@ -1,7 +1,8 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/style-prop-object */
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCountry } from '../../redux/currentCountrySlice';
 import { selectAllCountries } from '../../redux/covidInfoSlice';
 import ReactMapGL, { Marker, NavigationControl, Layer } from "react-map-gl";
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -34,6 +35,7 @@ export const Map = () => {
     });
   });
 
+  const dispatch = useDispatch();
   const classes = useStyles();
   const isLoaded = useSelector(state => state.covidInfo.loading);
   const countries = useSelector(selectAllCountries);
@@ -50,6 +52,11 @@ export const Map = () => {
     {name: 'medium', color: 'rgba(53,211,156,0.7)'},
     {name: 'large', color: 'rgba(230, 0, 0, 0.7)'},
   ];
+
+  const handleMarkerClick = (country) => {
+    setTooltip(country);
+    dispatch(setCountry(country.CountryCode));
+  }
 
   return (
     <Paper className={classes.root} square>
@@ -87,7 +94,7 @@ export const Map = () => {
                     height: size,
                     width: size,
                   }}
-                  onClick={() => setTooltip(country)}
+                  onClick={() => handleMarkerClick(country)}
                 />
               </Marker>
             );
