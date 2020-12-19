@@ -10,7 +10,7 @@ export const Tooltip = ({country, handleCloseTooltip}) => {
       tipSize={0}
       longitude={(country.geometry)[1]}
       latitude={(country.geometry)[0]}
-      closeButton={true}
+      closeButton={false}
       onClose={() => handleCloseTooltip()}
     >
       <div className={classes.mapTooltip}>

@@ -1,5 +1,6 @@
 import React from 'react';
-import {useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCountry } from '../../redux/currentCountrySlice';
 import { selectAllCountries } from '../../redux/covidInfoSlice';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -14,6 +15,7 @@ import Spinner from '../spinner';
 import {useStyles} from './styles';
 
 export const CountriesList = () => {
+  const dispatch = useDispatch();
   const classes = useStyles();
   const isLoaded = useSelector(state => state.covidInfo.loading);
   const countries = useSelector(selectAllCountries);
@@ -25,9 +27,13 @@ export const CountriesList = () => {
         <Box>
           <Typography className={classes.title}>Cases by Country</Typography>
           <List className={classes.list}>
-            {countries.map((country) => (
+            {countries
+              .sort((country1, country2) => country2.TotalConfirmed - country1.TotalConfirmed)
+              .map((country) => (
               <React.Fragment key={country.CountryCode}>
-                <ListItem button >
+                <ListItem
+                  onClick={() => dispatch(setCountry(country.CountryCode))}
+                  button >
                   <ListItemText
                     primary={
                       <Typography style={{color: '#e60000', fontSize: '16px', fontWeight: 'bold'}}>
