@@ -1,25 +1,27 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { useStyles } from "./styles";
-import { selectAllCountries } from "../../redux/covidInfoSlice";
-import Paper from "@material-ui/core/Paper";
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useStyles } from './styles';
+import { selectAllCountries } from '../../redux/covidInfoSlice';
+import { selectGlobalInfo, selectInfoLoader } from '../../redux/covidInfoSlice';
+import { setCountry } from '../../redux/currentCountrySlice';
+import Paper from '@material-ui/core/Paper';
 import {
   Box,
   Divider,
   List,
   ListItem,
   ListItemText,
-  Typography
-} from "@material-ui/core";
-import Spinner from "../spinner";
+  Typography,
+} from '@material-ui/core';
+import Spinner from '../spinner';
 
 export const GlobalCountries = () => {
   const classes = useStyles();
-  const isLoaded = useSelector((state) => state.covidInfo.loading);
+  const dispatch = useDispatch();
+
+  const isLoaded = useSelector(selectInfoLoader);
   const countries = useSelector(selectAllCountries);
-  const globalCases = useSelector(
-    (state) => state.covidInfo.Global.TotalDeaths
-  );
+  const globalCases = useSelector(selectGlobalInfo).TotalDeaths;
 
   return (
     <Paper
@@ -27,7 +29,7 @@ export const GlobalCountries = () => {
       variant="outlined"
       square={true}
     >
-      {isLoaded === "idle" && (
+      {isLoaded === 'idle' && (
         <>
           <Box className={classes.global}>
             <Typography className={classes.title} align="center">
@@ -38,18 +40,22 @@ export const GlobalCountries = () => {
             </Typography>
           </Box>
           <List button="true" className={classes.countryList}>
-            {countries.map((country) => (
+            {countries.map(country => (
               <React.Fragment key={country.CountryCode}>
-                <ListItem button className={classes.itemCountry}>
+                <ListItem
+                  button
+                  className={classes.itemCountry}
+                  onClick={() => dispatch(setCountry(country.CountryCode))}
+                >
                   <ListItemText
                     className={classes.itemText}
                     primary={
                       <Typography
                         style={{
-                          color: "#fff",
-                          fontSize: "14px",
-                          fontWeight: "bold",
-                          display: "inline"
+                          color: '#fff',
+                          fontSize: '14px',
+                          fontWeight: 'bold',
+                          display: 'inline',
                         }}
                       >
                         {country.TotalDeaths}
@@ -58,10 +64,10 @@ export const GlobalCountries = () => {
                     secondary={
                       <Typography
                         style={{
-                          color: "#fff",
-                          fontSize: "14px",
-                          marginLeft: "5px",
-                          display: "inline"
+                          color: '#fff',
+                          fontSize: '14px',
+                          marginLeft: '5px',
+                          display: 'inline',
                         }}
                       >
                         deaths
@@ -73,8 +79,8 @@ export const GlobalCountries = () => {
                     secondary={
                       <Typography
                         style={{
-                          color: "#ebebeb",
-                          fontSize: "14px"
+                          color: '#ebebeb',
+                          fontSize: '14px',
                         }}
                       >
                         {country.Country}
@@ -88,7 +94,7 @@ export const GlobalCountries = () => {
           </List>
         </>
       )}
-      {isLoaded === "pending" && <Spinner />}
+      {isLoaded === 'pending' && <Spinner />}
     </Paper>
   );
 };
