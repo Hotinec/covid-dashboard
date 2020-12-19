@@ -10,12 +10,13 @@ export const CaseChart = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { currentCountry } = useSelector((state) => state);
-  const { data } = useSelector((state) => state.chartInfo);
-  console.log(data);
+  const chartData = useSelector((state) => state.chartInfo.data);
 
   useEffect(() => {
     dispatch(fetchChartData(currentCountry));
+  }, [currentCountry]);
 
+  useEffect(() => {
     const myChartRef = chartRef.current.getContext("2d");
     new Chart(myChartRef, {
       type: "line",
@@ -39,11 +40,11 @@ export const CaseChart = () => {
         }
       },
       data: {
-        labels: data.map((d) => d.last_update),
+        labels: chartData.map((d) => d.last_update),
         datasets: [
           {
             label: "Total cases",
-            data: data.map((d) => d.total_cases),
+            data: chartData.map((d) => d.total_cases),
             fill: "none",
             backgroundColor: "#fff",
             pointRadius: 2,
@@ -54,7 +55,7 @@ export const CaseChart = () => {
         ]
       }
     });
-  }, []);
+  }, [chartData]);
 
   return (
     <Paper className={classes.root} square>

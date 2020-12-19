@@ -14,6 +14,7 @@ export const fetchChartData = createAsyncThunk(
         `https://api.covid19api.com/country/${currentCountry}`
       );
     }
+    console.log(result);
     return result;
   }
 );
@@ -21,7 +22,7 @@ export const fetchChartData = createAsyncThunk(
 export const fetchCovidInfo = createAsyncThunk("covidInfo/set", async () => {
   const apiResponse = await apiRequest("https://api.covid19api.com/summary");
   const additionalInfo = await apiRequest(
-    'https://restcountries.eu/rest/v2/all?fields=alpha2Code;population;flag;latlng',
+    "https://restcountries.eu/rest/v2/all?fields=alpha2Code;population;flag;latlng"
   );
   const countries = apiResponse.Countries;
   const extendCountriesList = countries.map((item) => {
