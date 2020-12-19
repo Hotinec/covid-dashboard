@@ -2,6 +2,7 @@ import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import Search from '../search';
 import {useStyles} from './styles';
 import logo from '../../images/rs_school_js_logo.svg';
 
@@ -20,6 +21,7 @@ export const Header = () => {
           <Typography className={classes.title}>Covid Dashboard</Typography>
         </Box>
       </Box>
+      <Search />
     </Paper>
   );
 }

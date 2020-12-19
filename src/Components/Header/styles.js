@@ -9,6 +9,7 @@ export const useStyles = makeStyles((theme) => ({
     backgroundColor: '#24292e',
     display: 'flex',
     alignItems: 'center',
+    justifyContent: 'space-between',
     padding: '0 10px',
     height: theme.spacing(7)
   },

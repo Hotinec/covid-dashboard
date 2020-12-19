@@ -9,9 +9,13 @@ import { useStyles } from './styles';
 export const GlobalCases = () => {
   const classes = useStyles();
   const isLoaded = useSelector(state => state.covidInfo.loading);
+  const dateValue = useSelector(state => state.covidInfo.Date);
   const globalCases = useSelector(
     state => state.covidInfo.Global.TotalConfirmed,
   );
+
+  const date = new Date(dateValue);
+  const parseDate = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
 
   return (
     <Paper className={classes.root} square>
@@ -19,6 +23,7 @@ export const GlobalCases = () => {
         <Box>
           <Typography className={classes.caseTitle}>Global Cases</Typography>
           <Typography className={classes.caseCount}>{globalCases}</Typography>
+          <Typography className={classes.caseTitle}>{parseDate}</Typography>
         </Box>
       ) : (
         <Spinner />
