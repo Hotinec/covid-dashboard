@@ -94,17 +94,16 @@ export const Map = () => {
                     height: size,
                     width: size,
                   }}
-                  onClick={() => handleMarkerClick(country)}
+                  onClick={() => dispatch(setCountry(country.CountryCode))}
+                  onMouseEnter={() => setTooltip(country)}
+                  onMouseLeave={() => setTooltip(null)}
                 />
               </Marker>
             );
           })}
 
           {tooltip && (
-            <Tooltip
-              country={tooltip}
-              handleCloseTooltip={() => setTooltip(null)}
-            />
+            <Tooltip country={tooltip} />
           )}
 
           <Box className={classes.mapNav}>
