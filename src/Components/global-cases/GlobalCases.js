@@ -6,6 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import Spinner from '../spinner';
 import { useStyles } from './styles';
 
+// const regex = /\B(?=(\d{3})+(?!\d))/g;
+
 export const GlobalCases = () => {
   const classes = useStyles();
   const isLoaded = useSelector(state => state.covidInfo.loading);
@@ -22,7 +24,9 @@ export const GlobalCases = () => {
       {isLoaded === 'idle' ? (
         <Box>
           <Typography className={classes.caseTitle}>Global Cases</Typography>
-          <Typography className={classes.caseCount}>{globalCases}</Typography>
+          <Typography className={classes.caseCount}>
+            {globalCases}
+          </Typography>
           <Typography className={classes.caseTitle}>{parseDate}</Typography>
         </Box>
       ) : (

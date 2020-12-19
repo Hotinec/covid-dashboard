@@ -16,6 +16,9 @@ export const useStyles = makeStyles((theme) => ({
   title: {
     fontSize: '1.6994866rem',
     lineHeight: 0,
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    },
   },
   media: {
     width: '93px',

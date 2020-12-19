@@ -14,6 +14,8 @@ import Typography from '@material-ui/core/Typography';
 import Spinner from '../spinner';
 import {useStyles} from './styles';
 
+const regex = /\B(?=(\d{3})+(?!\d))/g;
+
 export const CountriesList = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
@@ -37,7 +39,7 @@ export const CountriesList = () => {
                   <ListItemText
                     primary={
                       <Typography style={{color: '#e60000', fontSize: '16px', fontWeight: 'bold'}}>
-                        {country.TotalConfirmed}
+                        {country.TotalConfirmed.toString().replace(regex, ",")}
                       </Typography>
                     }
                   />
@@ -45,7 +47,11 @@ export const CountriesList = () => {
                     classes={{root: classes.countryName}}
                     primary={
                       <Typography style={{ color: '#d6d6d6', fontSize: '16px'}}>
-                        {country.Country}
+                        {
+                          country.Country === 'United States of America' 
+                          ? 'USA'
+                          : country.Country
+                        }
                       </Typography>
                     }
                   />

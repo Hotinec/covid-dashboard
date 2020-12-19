@@ -2,6 +2,8 @@ import React from "react";
 import { Popup } from "react-map-gl";
 import { useStyles } from './styles';
 
+const regex = /\B(?=(\d{3})+(?!\d))/g;
+
 export const Tooltip = ({country, handleCloseTooltip}) => {
   const classes = useStyles();
 
@@ -26,7 +28,9 @@ export const Tooltip = ({country, handleCloseTooltip}) => {
 
         <div className={classes.mapTooltipField}>
           <div className={classes.mapTooltipLabel}>Total:</div>
-          <div className={classes.mapTooltipValue}>{country.TotalRecovered}</div>
+          <div className={classes.mapTooltipValue}>
+            {country.TotalRecovered.toString().replace(regex, ",")}
+          </div>
         </div>
       </div>
     </Popup>
