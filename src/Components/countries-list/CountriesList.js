@@ -27,7 +27,9 @@ export const CountriesList = () => {
         <Box>
           <Typography className={classes.title}>Cases by Country</Typography>
           <List className={classes.list}>
-            {countries.map((country) => (
+            {countries
+              .sort((country1, country2) => country2.TotalConfirmed - country1.TotalConfirmed)
+              .map((country) => (
               <React.Fragment key={country.CountryCode}>
                 <ListItem
                   onClick={() => dispatch(setCountry(country.CountryCode))}
