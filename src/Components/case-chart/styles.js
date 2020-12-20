@@ -11,5 +11,14 @@ export const useStyles = makeStyles((theme) => ({
   },
   title: {
     fontSize: "16px"
+  },
+  resizeIcon: {
+    position: 'absolute',
+    top: 5,
+    right: 5,
+    color: '#888',
+    zIndex: 10,
+    border: '1px solid #363636',
+    borderRadius: '50%',
   }
 }));

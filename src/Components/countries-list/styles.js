@@ -38,5 +38,14 @@ export const useStyles = makeStyles((theme) => ({
   },
   itemIcon: {
     justifyContent: 'flex-end',
+  },
+  resizeIcon: {
+    position: 'absolute',
+    top: 5,
+    right: 5,
+    color: '#888',
+    zIndex: 10,
+    border: '1px solid #363636',
+    borderRadius: '50%',
   }
 }));

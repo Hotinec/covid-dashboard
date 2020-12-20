@@ -14,6 +14,9 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     textAlign: 'center',
   },
+  open: {
+    height: theme.spacing(87),
+  },
   caseTitle: {
     color: 'rgb(255, 255, 255)',
     strokeWidth: 2,
@@ -25,5 +28,14 @@ export const useStyles = makeStyles((theme) => ({
     strokeWidth: 2,
     lineHeight: 'normal',
     fontSize: 29,
+  },
+  resizeIcon: {
+    position: 'absolute',
+    top: 5,
+    right: 5,
+    color: '#888',
+    zIndex: 10,
+    border: '1px solid #363636',
+    borderRadius: '50%',
   }
 }));

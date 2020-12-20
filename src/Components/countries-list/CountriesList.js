@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCountry } from '../../redux/currentCountrySlice';
+import { setBoard } from '../../redux/currentBoardSlice';
 import { selectAllCountries } from '../../redux/covidInfoSlice';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -11,19 +12,39 @@ import Icon from '@material-ui/core/Icon';
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import FullscreenExitIcon from '@material-ui/icons/FullscreenExit';
 import Spinner from '../spinner';
+import { selectCurrentBoard } from '../../redux/currentBoardSlice.js';
 import {useStyles} from './styles';
-
-const regex = /\B(?=(\d{3})+(?!\d))/g;
 
 export const CountriesList = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
+  const currentBoard = useSelector(selectCurrentBoard);
   const isLoaded = useSelector(state => state.covidInfo.loading);
   const countries = useSelector(selectAllCountries);
 
+  const resizeClickHandler = (e) => {
+    if (currentBoard === 2) {
+      dispatch(setBoard(0));
+      return;
+    }
+
+    dispatch(setBoard(2));
+  }
+
   return (
-    <Paper className={classes.root} square>
+    <Paper 
+      className={classes.root}
+      square>
+      <IconButton 
+        aria-label="delete"
+        className={classes.resizeIcon}
+        size="small"
+        onClick={(e) => resizeClickHandler(e)}>
+        <FullscreenExitIcon fontSize="inherit" />
+      </IconButton>
       {
         isLoaded === 'idle' ? 
         <Box>
@@ -39,7 +60,7 @@ export const CountriesList = () => {
                   <ListItemText
                     primary={
                       <Typography style={{color: '#e60000', fontSize: '16px', fontWeight: 'bold'}}>
-                        {country.TotalConfirmed.toString().replace(regex, ",")}
+                        {country.TotalConfirmed}
                       </Typography>
                     }
                   />

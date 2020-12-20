@@ -2,7 +2,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 export const useStyles = makeStyles((theme) => ({
   root: {
-    // minWidth: 275,
+    position: 'relative',
     height: theme.spacing(40),
     marginBottom: theme.spacing(1),
     border: "1px solid #363636",
@@ -10,6 +10,9 @@ export const useStyles = makeStyles((theme) => ({
     backgroundColor: "#24292e",
     padding: "10px"
   },
+  // open: {
+  //   height: theme.spacing(87),
+  // },
   title: {
     fontSize: "16px",
   },
@@ -51,5 +54,14 @@ export const useStyles = makeStyles((theme) => ({
     height: "97.5%",
     paddingTop: "0",
     paddingBottom: "0"
+  },
+  resizeIcon: {
+    position: 'absolute',
+    top: 5,
+    right: 5,
+    color: '#888',
+    zIndex: 10,
+    border: '1px solid #363636',
+    borderRadius: '50%',
   }
 }));

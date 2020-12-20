@@ -2,11 +2,13 @@ import { configureStore } from "@reduxjs/toolkit";
 import covidInfo from "./covidInfoSlice";
 import currentCountry from "./currentCountrySlice";
 import chartInfo from "./chartInfoSlice";
+import currentBoard from './currentBoardSlice';
 
 const rootReducer = {
   covidInfo,
   currentCountry,
-  chartInfo
+  chartInfo,
+  currentBoard
 };
 
 const store = configureStore({

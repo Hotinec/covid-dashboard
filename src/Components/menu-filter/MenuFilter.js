@@ -41,7 +41,7 @@ export const MenuFilter = () => {
         color="primary"
         onClick={handleClick}
       >
-        Indicators
+        Cases
       </Button>
       <Menu
         id="long-menu"
