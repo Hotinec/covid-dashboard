@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useStyles } from './styles';
-import { selectAllCountries } from '../../redux/covidInfoSlice';
+import { filteredQueryCountries } from '../../redux/covidInfoSlice';
 import { selectGlobalInfo, selectInfoLoader } from '../../redux/covidInfoSlice';
 import { setCountry } from '../../redux/currentCountrySlice';
 import Paper from '@material-ui/core/Paper';
@@ -20,8 +20,12 @@ export const GlobalCountries = () => {
   const dispatch = useDispatch();
 
   const isLoaded = useSelector(selectInfoLoader);
-  const countries = useSelector(selectAllCountries);
+  const countries = useSelector(filteredQueryCountries);
   const globalCases = useSelector(selectGlobalInfo).TotalDeaths;
+
+  if (countries.length === 1) {
+    dispatch(setCountry(countries[0].Code));
+  }
 
   return (
     <Paper
@@ -41,11 +45,11 @@ export const GlobalCountries = () => {
           </Box>
           <List button="true" className={classes.countryList}>
             {countries.map(country => (
-              <React.Fragment key={country.CountryCode}>
+              <React.Fragment key={country.Code}>
                 <ListItem
                   button
                   className={classes.itemCountry}
-                  onClick={() => dispatch(setCountry(country.CountryCode))}
+                  onClick={() => dispatch(setCountry(country.Code))}
                 >
                   <ListItemText
                     className={classes.itemText}
@@ -58,7 +62,7 @@ export const GlobalCountries = () => {
                           display: 'inline',
                         }}
                       >
-                        {country.TotalDeaths}
+                        {country.Cases}
                       </Typography>
                     }
                     secondary={

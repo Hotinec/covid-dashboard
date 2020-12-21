@@ -1,34 +1,26 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import { parameters } from '../../constants';
+import { setParameter } from '../../redux/parameterSlice';
 
-const options = [
-  '1',
-  '2',
-  '3',
-  '4',
-  '5',
-  '6',
-  '7',
-  '8',
-  '9',
-  '10',
-  '11',
-  '12',
-];
+const options = Object.values(parameters);
 
 const ITEM_HEIGHT = 48;
 
 export const MenuFilter = () => {
+  const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
-  const handleClick = (event) => {
+  const handleClick = event => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
+  const handleClose = e => {
+    dispatch(setParameter(e.target.firstChild.textContent));
     setAnchorEl(null);
   };
 
@@ -52,16 +44,19 @@ export const MenuFilter = () => {
         PaperProps={{
           style: {
             maxHeight: ITEM_HEIGHT * 4.5,
-            width: '20ch',
+            width: '32ch',
           },
         }}
       >
-        {options.map((option) => (
-          <MenuItem key={option} selected={option === 'Pyxis'} onClick={handleClose}>
-            {option}
-          </MenuItem>
+        {options.map(option => (
+          <MenuItem
+            key={option}
+            selected={option === 'Pyxis'}
+            onClick={handleClose}
+            children={option}
+          ></MenuItem>
         ))}
       </Menu>
     </div>
   );
-}
+};
