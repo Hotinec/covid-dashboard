@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
   root: {
     position: 'relative',
-    height: theme.spacing(10),
+    height: '20%',
     marginBottom: theme.spacing(1),
     border: '1px solid #363636',
     color: '#bdbdbd',
@@ -15,7 +15,7 @@ export const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
   },
   open: {
-    height: theme.spacing(87),
+    height: 'calc(100vh - 72px)',
   },
   caseTitle: {
     color: 'rgb(255, 255, 255)',
@@ -23,11 +23,17 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: 14,
     lineHeight: 'normal',
   },
+  openTitle: {
+    fontSize: 24,
+  },
   caseCount: {
     color: 'rgb(230, 0, 0)',
     strokeWidth: 2,
     lineHeight: 'normal',
     fontSize: 29,
+  },
+  openCount: {
+    fontSize: 39,
   },
   resizeIcon: {
     position: 'absolute',

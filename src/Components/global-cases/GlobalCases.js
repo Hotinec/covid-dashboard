@@ -44,11 +44,13 @@ export const GlobalCases = () => {
       </IconButton>
       {isLoaded === 'idle' ? (
         <Box>
-          <Typography className={classes.caseTitle}>Global Cases</Typography>
-          <Typography className={classes.caseCount}>
+          <Typography className={`${classes.caseTitle} ${currentBoard === 1 ? classes.openTitle : ''}`}>
+              Global Cases
+            </Typography>
+          <Typography className={`${classes.caseCount} ${currentBoard === 1 ? classes.openCount : ''}`}>
             {globalCases}
           </Typography>
-          <Typography className={classes.caseTitle}>{parseDate}</Typography>
+          <Typography className={`${classes.caseTitle} ${currentBoard === 1 ? classes.openTitle : ''}`}>{parseDate}</Typography>
         </Box>
       ) : (
         <Spinner />

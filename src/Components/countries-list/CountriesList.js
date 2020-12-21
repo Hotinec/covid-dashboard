@@ -36,7 +36,7 @@ export const CountriesList = () => {
 
   return (
     <Paper 
-      className={classes.root}
+      className={`${classes.root} ${currentBoard === 2 ? classes.open : ''}`}
       square>
       <IconButton 
         aria-label="delete"
@@ -47,7 +47,7 @@ export const CountriesList = () => {
       </IconButton>
       {
         isLoaded === 'idle' ? 
-        <Box>
+        <Box className={classes.wraper}>
           <Typography className={classes.title}>Cases by Country</Typography>
           <List className={classes.list}>
             {countries

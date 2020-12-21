@@ -2,12 +2,20 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: "1",
+    height: '50%',
     border: "1px solid #363636",
     color: "#bdbdbd",
     backgroundColor: "#24292e",
     padding: "10px",
-    position: "relative"
+    position: "relative",
+    display: 'flex',
+    alignItems: 'center',
+    [theme.breakpoints.down('sm')]: {
+      height: '100%',
+    },
+  },
+  open: {
+    height: 'calc(100vh - 72px)',
   },
   title: {
     fontSize: "16px"
