@@ -4,10 +4,14 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCountry } from '../../redux/currentCountrySlice';
 import { selectAllCountries } from '../../redux/covidInfoSlice';
+import { selectCurrentBoard } from '../../redux/currentBoardSlice.js';
+import { setBoard } from '../../redux/currentBoardSlice';
 import ReactMapGL, { Marker, NavigationControl, Layer } from "react-map-gl";
 import 'mapbox-gl/dist/mapbox-gl.css';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
+import IconButton from '@material-ui/core/IconButton';
+import FullscreenExitIcon from '@material-ui/icons/FullscreenExit';
 import Spinner from '../spinner';
 import Tooltip from '../tooltip';
 import Legend from '../legend';
@@ -37,6 +41,7 @@ export const Map = () => {
 
   const dispatch = useDispatch();
   const classes = useStyles();
+  const currentBoard = useSelector(selectCurrentBoard);
   const isLoaded = useSelector(state => state.covidInfo.loading);
   const countries = useSelector(selectAllCountries);
 
@@ -58,8 +63,26 @@ export const Map = () => {
     dispatch(setCountry(country.CountryCode));
   }
 
+  const resizeClickHandler = (e) => {
+    if (currentBoard === 3) {
+      dispatch(setBoard(0));
+      return;
+    }
+
+    dispatch(setBoard(3));
+  }
+
   return (
-    <Paper className={classes.root} square>
+    <Paper 
+      className={`${classes.root} ${currentBoard === 3 ? classes.open : ''}`}
+      square>
+      <IconButton 
+        aria-label="delete"
+        className={classes.resizeIcon}
+        size="small"
+        onClick={(e) => resizeClickHandler(e)}>
+        <FullscreenExitIcon fontSize="inherit" />
+      </IconButton>
       {
         isLoaded === 'idle' ?
         <>

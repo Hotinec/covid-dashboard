@@ -9,12 +9,16 @@ export const useStyles = makeStyles((theme) => ({
     backgroundColor: '#24292e',
     display: 'flex',
     alignItems: 'center',
+    justifyContent: 'space-between',
     padding: '0 10px',
     height: theme.spacing(7)
   },
   title: {
     fontSize: '1.6994866rem',
     lineHeight: 0,
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    },
   },
   media: {
     width: '93px',
