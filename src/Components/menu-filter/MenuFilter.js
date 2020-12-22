@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useStyles } from './styles';
+/* eslint-disable react/no-children-prop */
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { MenuItem, Menu, Button } from "@material-ui/core";
+import { useStyles } from "./styles";
 
-import { MenuItem, Menu, Button } from '@material-ui/core';
-import { parameters } from '../../constants';
-import { setParameter } from '../../redux/parameterSlice';
+import { parameters } from "../../constants";
+import { setParameter } from "../../redux/parameterSlice";
 
 const options = Object.values(parameters);
 
@@ -16,11 +17,11 @@ export const MenuFilter = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
-  const handleClick = event => {
+  const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = e => {
+  const handleClose = (e) => {
     if (e.target.firstChild) {
       dispatch(setParameter(e.target.firstChild.textContent));
     }
@@ -49,22 +50,18 @@ export const MenuFilter = () => {
         PaperProps={{
           style: {
             maxHeight: ITEM_HEIGHT * 4.5,
-            width: '40ch',
-            backgroundColor: '#ddd',
+            width: "40ch",
+            backgroundColor: "#ddd",
           },
         }}
       >
-        {options.map(option => (
-       
-            <MenuItem
-              key={option}
-              selected={option === 'Pyxis'}
-              onClick={handleClose}
-              children={option}
-            >
-            </MenuItem>
-            
- 
+        {options.map((option) => (
+          <MenuItem
+            key={option}
+            selected={option === "Pyxis"}
+            onClick={handleClose}
+            children={option}
+          />
         ))}
       </Menu>
     </div>

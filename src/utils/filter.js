@@ -1,155 +1,128 @@
-import { parameters } from '../constants';
+import { parameters } from "../constants";
 
-export const calculationPer100 = (count, population) => {
-  return Math.floor((count * 100000) / population);
-};
+export const calculationPer100 = (count, population) =>
+  Math.floor((count * 100000) / population);
 
 export const filter = (parameter, array) => {
   let filtered;
   switch (parameter) {
-    case '':
-      filtered = array.map(country => {
-        return {
-          Country: country.Country,
-          Cases: country.TotalConfirmed,
-          Code: country.CountryCode,
-          Flag: country.flag,
-          Geometry: country.geometry,
-        };
-      });
+    case "":
+      filtered = array.map((country) => ({
+        Country: country.Country,
+        Cases: country.TotalConfirmed,
+        Code: country.CountryCode,
+        Flag: country.flag,
+        Geometry: country.geometry,
+      }));
       break;
     case parameters.totalCases:
-      filtered = array.map(country => {
-        return {
-          Country: country.Country,
-          Cases: country.TotalConfirmed,
-          Code: country.CountryCode,
-          Flag: country.flag,
-          Geometry: country.geometry,
-        };
-      });
+      filtered = array.map((country) => ({
+        Country: country.Country,
+        Cases: country.TotalConfirmed,
+        Code: country.CountryCode,
+        Flag: country.flag,
+        Geometry: country.geometry,
+      }));
       break;
     case parameters.totalDeaths:
-      filtered = array.map(country => {
-        return {
-          Country: country.Country,
-          Cases: country.TotalDeaths,
-          Code: country.CountryCode,
-          Flag: country.flag,
-          Geometry: country.geometry,
-        };
-      });
+      filtered = array.map((country) => ({
+        Country: country.Country,
+        Cases: country.TotalDeaths,
+        Code: country.CountryCode,
+        Flag: country.flag,
+        Geometry: country.geometry,
+      }));
 
       break;
     case parameters.totalRecovered:
-      filtered = array.map(country => {
-        return {
-          Country: country.Country,
-          Cases: country.TotalRecovered,
-          Code: country.CountryCode,
-          Flag: country.flag,
-          Geometry: country.geometry,
-        };
-      });
+      filtered = array.map((country) => ({
+        Country: country.Country,
+        Cases: country.TotalRecovered,
+        Code: country.CountryCode,
+        Flag: country.flag,
+        Geometry: country.geometry,
+      }));
       break;
     case parameters.lastDayCases:
-      filtered = array.map(country => {
-        return {
-          Country: country.Country,
-          Cases: country.NewConfirmed,
-          Code: country.CountryCode,
-          Flag: country.flag,
-          Geometry: country.geometry,
-        };
-      });
+      filtered = array.map((country) => ({
+        Country: country.Country,
+        Cases: country.NewConfirmed,
+        Code: country.CountryCode,
+        Flag: country.flag,
+        Geometry: country.geometry,
+      }));
       break;
     case parameters.lastDayDeaths:
-      filtered = array.map(country => {
-        return {
-          Country: country.Country,
-          Cases: country.NewDeaths,
-          Code: country.CountryCode,
-          Flag: country.flag,
-          Geometry: country.geometry,
-        };
-      });
+      filtered = array.map((country) => ({
+        Country: country.Country,
+        Cases: country.NewDeaths,
+        Code: country.CountryCode,
+        Flag: country.flag,
+        Geometry: country.geometry,
+      }));
       break;
     case parameters.lastDayRecovered:
-      filtered = array.map(country => {
-        return {
-          Country: country.Country,
-          Cases: country.NewRecovered,
-          Code: country.CountryCode,
-          Flag: country.flag,
-          Geometry: country.geometry,
-        };
-      });
+      filtered = array.map((country) => ({
+        Country: country.Country,
+        Cases: country.NewRecovered,
+        Code: country.CountryCode,
+        Flag: country.flag,
+        Geometry: country.geometry,
+      }));
       break;
     case parameters.totalCases100:
-      filtered = array.map(country => {
-        return {
-          Country: country.Country,
-          Cases: calculationPer100(country.TotalConfirmed, country.population),
-          Code: country.CountryCode,
-          Flag: country.flag,
-          Geometry: country.geometry,
-        };
-      });
+      filtered = array.map((country) => ({
+        Country: country.Country,
+        Cases: calculationPer100(country.TotalConfirmed, country.population),
+        Code: country.CountryCode,
+        Flag: country.flag,
+        Geometry: country.geometry,
+      }));
       break;
     case parameters.totalDeath100:
-      filtered = array.map(country => {
-        return {
-          Country: country.Country,
-          Cases: calculationPer100(country.TotalDeaths, country.population),
-          Code: country.CountryCode,
-          Flag: country.flag,
-          Geometry: country.geometry,
-        };
-      });
+      filtered = array.map((country) => ({
+        Country: country.Country,
+        Cases: calculationPer100(country.TotalDeaths, country.population),
+        Code: country.CountryCode,
+        Flag: country.flag,
+        Geometry: country.geometry,
+      }));
       break;
     case parameters.totalRecovered100:
-      filtered = array.map(country => {
-        return {
-          Country: country.Country,
-          Cases: calculationPer100(country.TotalRecovered, country.population),
-          Code: country.CountryCode,
-          Flag: country.flag,
-          Geometry: country.geometry,
-        };
-      });
+      filtered = array.map((country) => ({
+        Country: country.Country,
+        Cases: calculationPer100(country.TotalRecovered, country.population),
+        Code: country.CountryCode,
+        Flag: country.flag,
+        Geometry: country.geometry,
+      }));
       break;
     case parameters.lastDayCases100:
-      filtered = array.map(country => {
-        return {
-          Country: country.Country,
-          Cases: calculationPer100(country.NewConfirmed, country.population),
-          Code: country.CountryCode,
-          Flag: country.flag,
-          Geometry: country.geometry,
-        };
-      });
+      filtered = array.map((country) => ({
+        Country: country.Country,
+        Cases: calculationPer100(country.NewConfirmed, country.population),
+        Code: country.CountryCode,
+        Flag: country.flag,
+        Geometry: country.geometry,
+      }));
       break;
     case parameters.lastDayDeaths100:
-      filtered = array.map(country => {
-        return {
-          Country: country.Country,
-          Cases: calculationPer100(country.NewDeaths, country.population),
-          Code: country.CountryCode,
-          Flag: country.flag,
-          Geometry: country.geometry,
-        };
-      });
+      filtered = array.map((country) => ({
+        Country: country.Country,
+        Cases: calculationPer100(country.NewDeaths, country.population),
+        Code: country.CountryCode,
+        Flag: country.flag,
+        Geometry: country.geometry,
+      }));
       break;
     case parameters.lastDayRecovered100:
-      filtered = array.map(country => {
-        return {
-          Country: country.Country,
-          Cases: calculationPer100(country.NewRecovered, country.population),
-          Code: country.CountryCode,
-          Flag: country.flag,
-          Geometry: country.geometry,
-        };
-      });
+      filtered = array.map((country) => ({
+        Country: country.Country,
+        Cases: calculationPer100(country.NewRecovered, country.population),
+        Code: country.CountryCode,
+        Flag: country.flag,
+        Geometry: country.geometry,
+      }));
       break;
 
     default:
@@ -160,37 +133,29 @@ export const filter = (parameter, array) => {
 export const chartFilter = (parameter, array, population) => {
   let filtered;
   switch (parameter) {
-    case '':
-      filtered = array.map(item => {
-        return {
-          date: item.last_update,
-          cases: item.total_cases || item.cases,
-        };
-      });
+    case "":
+      filtered = array.map((item) => ({
+        date: item.last_update,
+        cases: item.total_cases || item.cases,
+      }));
       break;
     case parameters.totalCases:
-      filtered = array.map(item => {
-        return {
-          date: item.last_update,
-          cases: item.total_cases || item.cases,
-        };
-      });
+      filtered = array.map((item) => ({
+        date: item.last_update,
+        cases: item.total_cases || item.cases,
+      }));
       break;
     case parameters.totalDeaths:
-      filtered = array.map(item => {
-        return {
-          date: item.last_update,
-          cases: item.total_deaths || item.deaths,
-        };
-      });
+      filtered = array.map((item) => ({
+        date: item.last_update,
+        cases: item.total_deaths || item.deaths,
+      }));
       break;
     case parameters.totalRecovered:
-      filtered = array.map(item => {
-        return {
-          date: item.last_update,
-          cases: item.total_recovered || item.recovered,
-        };
-      });
+      filtered = array.map((item) => ({
+        date: item.last_update,
+        cases: item.total_recovered || item.recovered,
+      }));
       break;
     case parameters.lastDayCases:
       filtered = array.map((item, index, arr) => {
@@ -231,34 +196,28 @@ export const chartFilter = (parameter, array, population) => {
       });
       break;
     case parameters.totalCases100:
-      filtered = array.map(item => {
-        return {
-          date: item.last_update,
-          cases:
-            calculationPer100(item.total_cases, population) ||
-            calculationPer100(item.cases, population),
-        };
-      });
+      filtered = array.map((item) => ({
+        date: item.last_update,
+        cases:
+          calculationPer100(item.total_cases, population) ||
+          calculationPer100(item.cases, population),
+      }));
       break;
     case parameters.totalDeath100:
-      filtered = array.map(item => {
-        return {
-          date: item.last_update,
-          cases:
-            calculationPer100(item.total_deaths, population) ||
-            calculationPer100(item.deaths, population),
-        };
-      });
+      filtered = array.map((item) => ({
+        date: item.last_update,
+        cases:
+          calculationPer100(item.total_deaths, population) ||
+          calculationPer100(item.deaths, population),
+      }));
       break;
     case parameters.totalRecovered100:
-      filtered = array.map(item => {
-        return {
-          date: item.last_update,
-          cases:
-            calculationPer100(item.total_recovered, population) ||
-            calculationPer100(item.recovered, population),
-        };
-      });
+      filtered = array.map((item) => ({
+        date: item.last_update,
+        cases:
+          calculationPer100(item.total_recovered, population) ||
+          calculationPer100(item.recovered, population),
+      }));
       break;
     case parameters.lastDayCases100:
       filtered = array.map((item, index, arr) => {

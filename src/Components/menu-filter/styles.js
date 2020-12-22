@@ -1,13 +1,13 @@
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from "@material-ui/core/styles";
 
-export const useStyles = makeStyles(theme => ({
+export const useStyles = makeStyles(() => ({
   icon: {
-    backgroundColor: '#bdbdbd',
+    backgroundColor: "#bdbdbd",
   },
   button: {
     width: 100,
     padding: 11,
-    backgroundColor: '#246dd4',
-    color: '#fff',
-  }
+    backgroundColor: "#246dd4",
+    color: "#fff",
+  },
 }));

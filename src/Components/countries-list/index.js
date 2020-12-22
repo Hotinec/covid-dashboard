@@ -1,3 +1,3 @@
-import { CountriesList } from './CountriesList.js';
+import { CountriesList } from "./CountriesList";
 
 export default CountriesList;

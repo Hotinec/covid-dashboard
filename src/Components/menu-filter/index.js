@@ -1,3 +1,3 @@
-import { MenuFilter } from './MenuFilter.js';
+import { MenuFilter } from "./MenuFilter";
 
 export default MenuFilter;

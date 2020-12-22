@@ -1,10 +1,8 @@
-import React from 'react';
-import { useStyles } from './styles';
-import { selectInfoLoader } from '../../redux/covidInfoSlice';
-import Paper from '@material-ui/core/Paper';
-import { useSelector } from 'react-redux';
-import { getCurrentCountryInfo } from '../../redux/currentCountrySlice';
-
+/* eslint-disable react/prop-types */
+/* eslint-disable react/destructuring-assignment */
+import React from "react";
+import Paper from "@material-ui/core/Paper";
+import { useSelector } from "react-redux";
 import {
   Divider,
   List,
@@ -12,34 +10,38 @@ import {
   ListItemText,
   Typography,
   Box,
-} from '@material-ui/core';
-import Spinner from '../spinner';
+} from "@material-ui/core";
+import { useStyles } from "./styles";
+import { selectInfoLoader } from "../../redux/covidInfoSlice";
+import { getCurrentCountryInfo } from "../../redux/currentCountrySlice";
 
-export const InfoTable = props => {
+import Spinner from "../spinner";
+
+export const InfoTable = (props) => {
   const classes = useStyles();
   const isLoaded = useSelector(selectInfoLoader);
   const currentCountryInfo = useSelector(getCurrentCountryInfo);
 
   return (
     <Paper className={classes.wrapperCountries} variant="outlined" square>
-      {isLoaded === 'idle' && (
+      {isLoaded === "idle" && (
         <>
           <Box className={classes.global}>
             <Typography className={classes.title} align="center">
-              {currentCountryInfo ? currentCountryInfo.Country : 'World'}
+              {currentCountryInfo ? currentCountryInfo.Country : "World"}
             </Typography>
           </Box>
           <List className={classes.countryList}>
-            {props.paramInfo.map(([desc, value], index) => (
-              <React.Fragment key={index}>
+            {props.paramInfo.map(([desc, value]) => (
+              <React.Fragment key={desc.toString()}>
                 <ListItem>
                   <ListItemText
                     className={classes.itemText}
                     primary={
                       <Typography
                         style={{
-                          color: '#d6d6d6',
-                          fontSize: '14px',
+                          color: "#d6d6d6",
+                          fontSize: "14px",
                         }}
                       >
                         {desc}
@@ -48,13 +50,13 @@ export const InfoTable = props => {
                     secondary={
                       <Typography
                         style={{
-                          color: '#fff',
-                          fontSize: '14px',
-                          marginLeft: '5px',
-                          fontWeight: 'bold',
+                          color: "#fff",
+                          fontSize: "14px",
+                          marginLeft: "5px",
+                          fontWeight: "bold",
                         }}
                       >
-                        {value ? value : 0}
+                        {value || 0}
                       </Typography>
                     }
                   />
@@ -65,7 +67,7 @@ export const InfoTable = props => {
           </List>
         </>
       )}
-      {isLoaded === 'pending' && <Spinner />}
+      {isLoaded === "pending" && <Spinner />}
     </Paper>
   );
 };

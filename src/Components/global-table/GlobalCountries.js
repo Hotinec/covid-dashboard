@@ -1,12 +1,7 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { useStyles } from './styles';
-import { filteredQueryCountries } from '../../redux/covidInfoSlice';
-import { selectGlobalInfo, selectInfoLoader } from '../../redux/covidInfoSlice';
-import { setCountry } from '../../redux/currentCountrySlice';
-import { selectParameter } from '../../redux/parameterSlice';
-import Paper from '@material-ui/core/Paper';
-import { parameters } from '../../constants';
+/* eslint-disable consistent-return */
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import Paper from "@material-ui/core/Paper";
 import {
   Box,
   Divider,
@@ -14,8 +9,18 @@ import {
   ListItem,
   ListItemText,
   Typography,
-} from '@material-ui/core';
-import Spinner from '../spinner';
+} from "@material-ui/core";
+import { useStyles } from "./styles";
+import {
+  filteredQueryCountries,
+  selectGlobalInfo,
+  selectInfoLoader,
+} from "../../redux/covidInfoSlice";
+
+import { setCountry } from "../../redux/currentCountrySlice";
+import { selectParameter } from "../../redux/parameterSlice";
+import { parameters } from "../../constants";
+import Spinner from "../spinner";
 
 export const GlobalCountries = () => {
   const classes = useStyles();
@@ -31,13 +36,13 @@ export const GlobalCountries = () => {
   }
   const changeSign = () => {
     if (
-      parameter === '' ||
+      parameter === "" ||
       parameter === parameters.totalCases ||
       parameter === parameters.lastDayCases ||
       parameter === parameters.totalCases100 ||
       parameter === parameters.lastDayCases100
     ) {
-      return 'confirmed';
+      return "confirmed";
     }
     if (
       parameter === parameters.totalDeaths ||
@@ -45,7 +50,7 @@ export const GlobalCountries = () => {
       parameter === parameters.totalDeath100 ||
       parameter === parameters.lastDayDeaths100
     ) {
-      return 'deaths';
+      return "deaths";
     }
     if (
       parameter === parameters.totalRecovered ||
@@ -53,28 +58,24 @@ export const GlobalCountries = () => {
       parameter === parameters.totalRecovered100 ||
       parameter === parameters.lastDayRecovered100
     ) {
-      return 'recovered';
+      return "recovered";
     }
   };
-  console.log(parameter);
+
   return (
-    <Paper
-      className={classes.wrapperCountries}
-      variant="outlined"
-      square={true}
-    >
-      {isLoaded === 'idle' && (
+    <Paper className={classes.wrapperCountries} variant="outlined" square>
+      {isLoaded === "idle" && (
         <>
           <Box className={classes.global}>
             <Typography className={classes.title} align="center">
-              {parameter || 'Total cases'}
+              {parameter || "Total cases"}
             </Typography>
             <Typography className={classes.globalCases} align="center">
               {globalCases}
             </Typography>
           </Box>
           <List button="true" className={classes.countryList}>
-            {countries.map(country => (
+            {countries.map((country) => (
               <React.Fragment key={country.Code}>
                 <ListItem
                   button
@@ -86,10 +87,10 @@ export const GlobalCountries = () => {
                     primary={
                       <Typography
                         style={{
-                          color: '#fff',
-                          fontSize: '14px',
-                          fontWeight: 'bold',
-                          display: 'inline',
+                          color: "#fff",
+                          fontSize: "14px",
+                          fontWeight: "bold",
+                          display: "inline",
                         }}
                       >
                         {country.Cases}
@@ -98,10 +99,10 @@ export const GlobalCountries = () => {
                     secondary={
                       <Typography
                         style={{
-                          color: '#fff',
-                          fontSize: '14px',
-                          marginLeft: '5px',
-                          display: 'inline',
+                          color: "#fff",
+                          fontSize: "14px",
+                          marginLeft: "5px",
+                          display: "inline",
                         }}
                       >
                         {changeSign()}
@@ -113,8 +114,8 @@ export const GlobalCountries = () => {
                     secondary={
                       <Typography
                         style={{
-                          color: '#ebebeb',
-                          fontSize: '14px',
+                          color: "#ebebeb",
+                          fontSize: "14px",
                         }}
                       >
                         {country.Country}
@@ -128,7 +129,7 @@ export const GlobalCountries = () => {
           </List>
         </>
       )}
-      {isLoaded === 'pending' && <Spinner />}
+      {isLoaded === "pending" && <Spinner />}
     </Paper>
   );
 };

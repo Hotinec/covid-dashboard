@@ -1,3 +1,3 @@
-import { GlobalCases } from './GlobalCases.js';
+import { GlobalCases } from "./GlobalCases";
 
 export default GlobalCases;
