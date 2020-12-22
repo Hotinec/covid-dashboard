@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setBoard, selectCurrentBoard } from '../../redux/currentBoardSlice';
+import {selectParameter}from '../../redux/parameterSlice';
 import Chart from 'chart.js';
 import { fetchChartData } from '../../redux/middlewares';
 import Paper from '@material-ui/core/Paper';
@@ -19,13 +20,9 @@ export const CaseChart = () => {
   const currentBoard = useSelector(selectCurrentBoard);
   const currentCountry = useSelector(selectCurrentCountry);
   const chartData = useSelector(getChartData);
+  const parameter = useSelector(selectParameter);
 
-  let dataMap;
-  if (currentCountry) {
-    dataMap = chartData.map(country => country.cases);
-  } else {
-    dataMap = chartData.map(country => country.total_cases);
-  }
+  const dataMap = chartData.map(country => country.cases);
 
   useEffect(() => {
     dispatch(fetchChartData(currentCountry));
@@ -55,13 +52,13 @@ export const CaseChart = () => {
         },
       },
       data: {
-        labels: chartData.map(d => d.last_update),
+        labels: chartData.map(d => d.date),
         datasets: [
           {
-            label: 'Total cases',
+            label: parameter || 'Total cases',
             data: dataMap,
             fill: 'none',
-            backgroundColor: '#fff',
+            backgroundColor: '#32a852',
             pointRadius: 1,
             borderColor: '#32a852',
             borderWidth: 0,
@@ -70,29 +67,31 @@ export const CaseChart = () => {
         ],
       },
     });
-    chart.data.labels = chartData.map(d => d.last_update);
+    chart.data.labels = chartData.map(d => d.date);
     chart.data.datasets.data = dataMap;
     chart.update();
   }, [chartData]);
 
-  const resizeClickHandler = (e) => {
+  const resizeClickHandler = e => {
     if (currentBoard === 5) {
       dispatch(setBoard(0));
       return;
     }
 
     dispatch(setBoard(5));
-  }
+  };
 
   return (
     <Paper
       className={`${classes.root} ${currentBoard === 5 ? classes.open : ''}`}
-      square>
-      <IconButton 
+      square
+    >
+      <IconButton
         aria-label="delete"
         className={classes.resizeIcon}
         size="small"
-        onClick={(e) => resizeClickHandler(e)}>
+        onClick={e => resizeClickHandler(e)}
+      >
         <FullscreenExitIcon fontSize="inherit" />
       </IconButton>
       <canvas id="chart" ref={chartRef} />
