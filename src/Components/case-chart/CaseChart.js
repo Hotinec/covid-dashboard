@@ -85,7 +85,9 @@ export const CaseChart = () => {
   }
 
   return (
-    <Paper className={classes.root} square>
+    <Paper
+      className={`${classes.root} ${currentBoard === 5 ? classes.open : ''}`}
+      square>
       <IconButton 
         aria-label="delete"
         className={classes.resizeIcon}

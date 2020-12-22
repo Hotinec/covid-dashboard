@@ -3,11 +3,17 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
   root: {
     position: 'relative',
-    flexGrow: '1',
+    height: '80%',
     border: '1px solid #363636',
     color: '#bdbdbd',
     backgroundColor: '#24292e',
     padding: '10px 0',
+    [theme.breakpoints.down('sm')]: {
+      height: '300px',
+    },
+  },
+  open: {
+    height: 'calc(100vh - 72px)',
   },
   title: {
     color: 'rgb(255, 255, 255)',
@@ -15,9 +21,17 @@ export const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     marginBottom: '20px',
   },
+  wraper: {
+    height: '100%',
+    position: 'relative'
+  },
   list: {
     overflowY: 'scroll',
-    height: 400,
+    position: 'absolute',
+    top: 50,
+    left: 0,
+    right: 0,
+    bottom: 8,
   },
   divider: {
     width: '100%',

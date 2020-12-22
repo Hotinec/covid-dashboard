@@ -35,8 +35,10 @@ export const CountriesList = () => {
   };
 
   return (
-    <Paper className={classes.root} square>
-      <IconButton
+    <Paper 
+      className={`${classes.root} ${currentBoard === 2 ? classes.open : ''}`}
+      square>
+      <IconButton 
         aria-label="delete"
         className={classes.resizeIcon}
         size="small"
@@ -44,8 +46,9 @@ export const CountriesList = () => {
       >
         <FullscreenExitIcon fontSize="inherit" />
       </IconButton>
-      {isLoaded === 'idle' ? (
-        <Box>
+      {
+        isLoaded === 'idle' ? 
+        (<Box className={classes.wraper}>
           <Typography className={classes.title}>Cases by Country</Typography>
           <List className={classes.list}>
             {countries

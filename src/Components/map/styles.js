@@ -8,9 +8,12 @@ export const useStyles = makeStyles((theme) => ({
     color: '#bdbdbd',
     backgroundColor: '#24292e',
     padding: '10px',
+    [theme.breakpoints.down('sm')]: {
+      height: '300px',
+    },
   },
   open: {
-    height: theme.spacing(87),
+    height: 'calc(100vh - 72px)',
   },
   marker: {
     borderRadius: '50%',

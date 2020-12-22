@@ -26,7 +26,7 @@ export const GlobalTable = () => {
 
   return (
     <Paper 
-      className={classes.root}
+      className={`${classes.root} ${currentBoard === 4 ? classes.open : ''}`}
       square={true}>
       <IconButton 
         aria-label="delete"
@@ -35,7 +35,10 @@ export const GlobalTable = () => {
         onClick={(e) => resizeClickHandler(e)}>
         <FullscreenExitIcon fontSize="inherit" />
       </IconButton>
-      <Box display="flex" justifyContent="space-between">
+      <Box
+        className={classes.wrapper}
+        display="flex"
+        justifyContent="space-between">
         <GlobalCountries />
         <InfoTable />
       </Box>

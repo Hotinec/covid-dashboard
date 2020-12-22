@@ -3,23 +3,33 @@ import { makeStyles } from "@material-ui/core/styles";
 export const useStyles = makeStyles((theme) => ({
   root: {
     position: 'relative',
-    height: theme.spacing(40),
+    height: '50%',
     marginBottom: theme.spacing(1),
     border: "1px solid #363636",
     color: "#bdbdbd",
     backgroundColor: "#24292e",
-    padding: "10px"
+    padding: "10px",
+    [theme.breakpoints.down('sm')]: {
+      height: '300px',
+    },
   },
-  // open: {
-  //   height: theme.spacing(87),
-  // },
+  open: {
+    height: 'calc(100vh - 72px)',
+  },
   title: {
     fontSize: "16px",
+  },
+  wrapper: {
+    position: 'absolute',
+    top: 8,
+    left: 8,
+    right: 8,
+    bottom: 8,
   },
   wrapperCountries: {
     width: "48%",
     backgroundColor: "#24292e",
-    height: theme.spacing(39.5),
+    height: '100%',
     border: "1px solid #363636",
     position: "relative"
   },
@@ -34,9 +44,13 @@ export const useStyles = makeStyles((theme) => ({
   },
   countryList: {
     overflowY: "scroll",
-    height: "80.5%",
     paddingTop: "0",
-    paddingBottom: "0"
+    paddingBottom: "0",
+    position: 'absolute',
+    top: 60,
+    left: 0,
+    right: 0,
+    bottom: 0,
   },
   itemCountry: {
     display: "flex",
