@@ -1,3 +1,3 @@
-import { CaseChart } from './CaseChart.js';
+import { CaseChart } from "./CaseChart";
 
 export default CaseChart;

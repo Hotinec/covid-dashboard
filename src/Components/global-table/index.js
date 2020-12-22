@@ -1,3 +1,3 @@
-import { GlobalTable } from './GlobalTable.js';
+import { GlobalTable } from "./GlobalTable";
 
 export default GlobalTable;

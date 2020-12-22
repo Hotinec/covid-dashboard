@@ -1,44 +1,46 @@
-import { createSlice, createEntityAdapter } from '@reduxjs/toolkit';
-import { fetchCovidInfo } from './middlewares';
-import { createSelector } from 'reselect';
-import { selectSearch } from './searchSlice';
-import { selectParameter } from './parameterSlice';
-import { filter } from '../utils/filter';
+/* eslint-disable import/no-extraneous-dependencies */
+import { createSlice, createEntityAdapter } from "@reduxjs/toolkit";
+import { createSelector } from "reselect";
+import { fetchCovidInfo } from "./middlewares";
+import { selectSearch } from "./searchSlice";
+import { selectParameter } from "./parameterSlice";
+import { filter } from "../utils/filter";
 
 export const countriesAdapter = createEntityAdapter({
-  selectId: country => country.CountryCode,
+  selectId: (country) => country.CountryCode,
 });
 
 const initialState = countriesAdapter.getInitialState({
   Global: {},
-  Date: '',
-  loading: 'idle',
+  Date: "",
+  loading: "idle",
   error: false,
 });
 
 const covidInfoSlice = createSlice({
-  name: 'covidInfo',
+  name: "covidInfo",
   initialState,
   reducers: {},
-  extraReducers: builder => {
-    builder.addCase(fetchCovidInfo.pending, state => {
+  extraReducers: (builder) => {
+    builder.addCase(fetchCovidInfo.pending, (state) => {
       if (state.error === true) {
         state.error = false;
       }
-      if (state.loading === 'idle') {
-        state.loading = 'pending';
+      if (state.loading === "idle") {
+        state.loading = "pending";
       }
     });
     builder.addCase(fetchCovidInfo.fulfilled, (state, { payload }) => {
       state.Date = payload.Date;
       state.Global = payload.Global;
-      state.loading = 'idle';
+      state.loading = "idle";
       countriesAdapter.upsertMany(state, payload.Countries);
     });
     builder.addCase(fetchCovidInfo.rejected, (state, action) => {
+      // eslint-disable-next-line no-console
       console.log(action.error);
-      if (state.loading === 'idle') {
-        state.loading = 'pending';
+      if (state.loading === "idle") {
+        state.loading = "pending";
       }
       if (state.error === false) {
         state.error = true;
@@ -48,16 +50,16 @@ const covidInfoSlice = createSlice({
 });
 
 export const selectGlobalInfo = createSelector(
-  state => state.covidInfo.Global,
-  global => global,
+  (state) => state.covidInfo.Global,
+  (global) => global
 );
 export const selectInfoLoader = createSelector(
-  state => state.covidInfo.loading,
-  loading => loading,
+  (state) => state.covidInfo.loading,
+  (loading) => loading
 );
 export const selectInfoError = createSelector(
-  state => state.covidInfo.error,
-  error => error,
+  (state) => state.covidInfo.error,
+  (error) => error
 );
 
 export const {
@@ -66,7 +68,7 @@ export const {
   selectEntities: selectCountryEntities,
   selectAll: selectAllCountries,
   selectTotal: selectTotalCountries,
-} = countriesAdapter.getSelectors(state => state.covidInfo);
+} = countriesAdapter.getSelectors((state) => state.covidInfo);
 
 export const filteredCountries = createSelector(
   selectAllCountries,
@@ -74,7 +76,7 @@ export const filteredCountries = createSelector(
   (countries, parameter) => {
     const filteredByParameter = filter(parameter, countries);
     return filteredByParameter;
-  },
+  }
 );
 
 export const filteredQueryCountries = createSelector(
@@ -82,12 +84,12 @@ export const filteredQueryCountries = createSelector(
   selectSearch,
   selectParameter,
   (countries, query, parameter) => {
-    const reg = new RegExp(`${query}`, 'gi');
-    const filtered = countries.filter(country => country.Country.match(reg));
+    const reg = new RegExp(`${query}`, "gi");
+    const filtered = countries.filter((country) => country.Country.match(reg));
     const filteredByParameter = filter(parameter, filtered);
 
     return filteredByParameter;
-  },
+  }
 );
 
 export default covidInfoSlice.reducer;

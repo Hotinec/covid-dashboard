@@ -1,11 +1,11 @@
-import React from 'react';
-import Grid from '@material-ui/core/Grid';
-import CountriesList from '../../Components/countries-list';
-import GlobalCases from '../../Components/global-cases';
-import Map from '../../Components/map';
-import GlobalTable from '../../Components/global-table';
-import CaseChart from '../../Components/case-chart';
-import {useStyles} from './styles';
+import React from "react";
+import Grid from "@material-ui/core/Grid";
+import CountriesList from "../../Components/countries-list";
+import GlobalCases from "../../Components/global-cases";
+import Map from "../../Components/map";
+import GlobalTable from "../../Components/global-table";
+import CaseChart from "../../Components/case-chart";
+import { useStyles } from "./styles";
 
 export const Dashboard = () => {
   const classes = useStyles();
@@ -13,7 +13,7 @@ export const Dashboard = () => {
   return (
     <Grid container spacing={1}>
       <Grid item md={3} xs={12} className={classes.item}>
-        <GlobalCases/>
+        <GlobalCases />
         <CountriesList />
       </Grid>
       <Grid item md={5} xs={12} className={classes.item}>
@@ -25,4 +25,4 @@ export const Dashboard = () => {
       </Grid>
     </Grid>
   );
-}
+};

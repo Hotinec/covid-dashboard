@@ -1,18 +1,18 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import { setBoard, selectCurrentBoard } from '../../redux/currentBoardSlice';
-import { selectGlobalInfo } from '../../redux/covidInfoSlice';
-import { getCurrentCountryInfo } from '../../redux/currentCountrySlice';
-import { GlobalCountries } from './GlobalCountries';
-import { InfoTable } from './InfoTable';
-import { getParametersArr } from '../../utils/parametersArray';
+import Paper from "@material-ui/core/Paper";
+import { Box } from "@material-ui/core";
+import IconButton from "@material-ui/core/IconButton";
+import FullscreenExitIcon from "@material-ui/icons/FullscreenExit";
+import { setBoard, selectCurrentBoard } from "../../redux/currentBoardSlice";
+import { selectGlobalInfo } from "../../redux/covidInfoSlice";
+import { getCurrentCountryInfo } from "../../redux/currentCountrySlice";
+import { GlobalCountries } from "./GlobalCountries";
+import { InfoTable } from "./InfoTable";
+import { getParametersArr } from "../../utils/parametersArray";
 
-import { useStyles } from './styles';
-import Paper from '@material-ui/core/Paper';
-import { Box } from '@material-ui/core';
-import IconButton from '@material-ui/core/IconButton';
-import FullscreenExitIcon from '@material-ui/icons/FullscreenExit';
+import { useStyles } from "./styles";
 
 export const GlobalTable = () => {
   const dispatch = useDispatch();
@@ -29,7 +29,7 @@ export const GlobalTable = () => {
     parametersInfo = getParametersArr(globalInfo);
   }
 
-  const resizeClickHandler = e => {
+  const resizeClickHandler = () => {
     if (currentBoard === 4) {
       dispatch(setBoard(0));
       return;
@@ -40,14 +40,14 @@ export const GlobalTable = () => {
 
   return (
     <Paper
-      className={`${classes.root} ${currentBoard === 4 ? classes.open : ''}`}
-      square={true}
+      className={`${classes.root} ${currentBoard === 4 ? classes.open : ""}`}
+      square
     >
       <IconButton
         aria-label="delete"
         className={classes.resizeIcon}
         size="small"
-        onClick={e => resizeClickHandler(e)}
+        onClick={(e) => resizeClickHandler(e)}
       >
         <FullscreenExitIcon fontSize="inherit" />
       </IconButton>
