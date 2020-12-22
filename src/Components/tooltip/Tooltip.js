@@ -4,8 +4,10 @@ import { useStyles } from './styles';
 
 const regex = /\B(?=(\d{3})+(?!\d))/g;
 
-export const Tooltip = ({ country, handleCloseTooltip }) => {
+export const Tooltip = ({ currentParametr, country, handleCloseTooltip }) => {
   const classes = useStyles();
+
+  const parameter = currentParametr.length > 0 ? currentParametr : 'TOTAl CASES';
 
   return (
     <Popup
@@ -19,7 +21,7 @@ export const Tooltip = ({ country, handleCloseTooltip }) => {
         <div className={classes.mapTooltipField}>
           <div
             className={classes.tooltipFlag}
-            style={{ backgroundImage: `url(${country.flag})` }}
+            style={{ backgroundImage: `url(${country.Flag})` }}
           />
           <div className={classes.mapTooltipHeader}>{country.Country}</div>
         </div>
@@ -27,7 +29,7 @@ export const Tooltip = ({ country, handleCloseTooltip }) => {
         <div className={classes.margin} />
 
         <div className={classes.mapTooltipField}>
-          <div className={classes.mapTooltipLabel}>Total:</div>
+          <div className={classes.mapTooltipLabel}>{parameter}:</div>
           <div className={classes.mapTooltipValue}>
             {country.Cases.toString().replace(regex, ',')}
           </div>
