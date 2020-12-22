@@ -1,17 +1,17 @@
-import React from "react";
-import { Popup } from "react-map-gl";
+import React from 'react';
+import { Popup } from 'react-map-gl';
 import { useStyles } from './styles';
 
 const regex = /\B(?=(\d{3})+(?!\d))/g;
 
-export const Tooltip = ({country, handleCloseTooltip}) => {
+export const Tooltip = ({ country, handleCloseTooltip }) => {
   const classes = useStyles();
 
   return (
     <Popup
       tipSize={0}
-      longitude={(country.geometry)[1]}
-      latitude={(country.geometry)[0]}
+      longitude={country.Geometry[1]}
+      latitude={country.Geometry[0]}
       closeButton={false}
       onClose={() => handleCloseTooltip()}
     >
@@ -29,10 +29,10 @@ export const Tooltip = ({country, handleCloseTooltip}) => {
         <div className={classes.mapTooltipField}>
           <div className={classes.mapTooltipLabel}>Total:</div>
           <div className={classes.mapTooltipValue}>
-            {country.TotalRecovered.toString().replace(regex, ",")}
+            {country.Cases.toString().replace(regex, ',')}
           </div>
         </div>
       </div>
     </Popup>
   );
-}
+};

@@ -1,6 +1,9 @@
 import { createSlice, createEntityAdapter } from '@reduxjs/toolkit';
 import { fetchCovidInfo } from './middlewares';
 import { createSelector } from 'reselect';
+import { selectSearch } from './searchSlice';
+import { selectParameter } from './parameterSlice';
+import { filter } from '../utils/filter';
 
 export const countriesAdapter = createEntityAdapter({
   selectId: country => country.CountryCode,
@@ -10,6 +13,7 @@ const initialState = countriesAdapter.getInitialState({
   Global: {},
   Date: '',
   loading: 'idle',
+  error: false,
 });
 
 const covidInfoSlice = createSlice({
@@ -18,6 +22,9 @@ const covidInfoSlice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder.addCase(fetchCovidInfo.pending, state => {
+      if (state.error === true) {
+        state.error = false;
+      }
       if (state.loading === 'idle') {
         state.loading = 'pending';
       }
@@ -27,6 +34,15 @@ const covidInfoSlice = createSlice({
       state.Global = payload.Global;
       state.loading = 'idle';
       countriesAdapter.upsertMany(state, payload.Countries);
+    });
+    builder.addCase(fetchCovidInfo.rejected, (state, action) => {
+      console.log(action.error);
+      if (state.loading === 'idle') {
+        state.loading = 'pending';
+      }
+      if (state.error === false) {
+        state.error = true;
+      }
     });
   },
 });
@@ -39,6 +55,10 @@ export const selectInfoLoader = createSelector(
   state => state.covidInfo.loading,
   loading => loading,
 );
+export const selectInfoError = createSelector(
+  state => state.covidInfo.error,
+  error => error,
+);
 
 export const {
   selectById: selectCountryById,
@@ -47,5 +67,27 @@ export const {
   selectAll: selectAllCountries,
   selectTotal: selectTotalCountries,
 } = countriesAdapter.getSelectors(state => state.covidInfo);
+
+export const filteredCountries = createSelector(
+  selectAllCountries,
+  selectParameter,
+  (countries, parameter) => {
+    const filteredByParameter = filter(parameter, countries);
+    return filteredByParameter;
+  },
+);
+
+export const filteredQueryCountries = createSelector(
+  selectAllCountries,
+  selectSearch,
+  selectParameter,
+  (countries, query, parameter) => {
+    const reg = new RegExp(`${query}`, 'gi');
+    const filtered = countries.filter(country => country.Country.match(reg));
+    const filteredByParameter = filter(parameter, filtered);
+
+    return filteredByParameter;
+  },
+);
 
 export default covidInfoSlice.reducer;

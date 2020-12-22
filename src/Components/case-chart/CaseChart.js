@@ -98,4 +98,4 @@ export const CaseChart = () => {
       <canvas id="chart" ref={chartRef} />
     </Paper>
   );
-}
+};

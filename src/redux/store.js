@@ -3,12 +3,16 @@ import covidInfo from "./covidInfoSlice";
 import currentCountry from "./currentCountrySlice";
 import chartInfo from "./chartInfoSlice";
 import currentBoard from './currentBoardSlice';
+import search from "./searchSlice";
+import parameter from './parameterSlice';
 
 const rootReducer = {
   covidInfo,
   currentCountry,
   chartInfo,
-  currentBoard
+  currentBoard, 
+  search,
+  parameter
 };
 
 const store = configureStore({

@@ -44,4 +44,4 @@ export const GlobalTable = () => {
       </Box>
     </Paper>
   );
-}
+};
