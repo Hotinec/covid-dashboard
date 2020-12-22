@@ -1,15 +1,18 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/style-prop-object */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCountry } from '../../redux/currentCountrySlice';
 import {
   filteredCountries,
   selectInfoLoader,
 } from '../../redux/covidInfoSlice';
+import { selectCurrentCountry } from '../../redux/currentCountrySlice';
 import { selectCurrentBoard } from '../../redux/currentBoardSlice.js';
 import { setBoard } from '../../redux/currentBoardSlice';
-import ReactMapGL, { Marker, NavigationControl, Layer } from 'react-map-gl';
+import { selectParameter } from '../../redux/parameterSlice';
+import { selectCountryById } from '../../redux/covidInfoSlice';
+import ReactMapGL, { Marker, NavigationControl, Layer, FlyToInterpolator } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
@@ -48,6 +51,13 @@ export const Map = () => {
   const currentBoard = useSelector(selectCurrentBoard);
   const isLoaded = useSelector(selectInfoLoader);
   const countries = useSelector(filteredCountries);
+  const currentParametr = useSelector(selectParameter);
+  const currentCountry = useSelector(selectCurrentCountry);
+  const currentCountryInfo = useSelector(state =>
+    selectCountryById(state, currentCountry),
+  );
+
+  console.log(currentCountryInfo)
 
   const counts = countries.map(country => country.Cases);
   const maxCount = Math.max(...counts);
@@ -61,6 +71,22 @@ export const Map = () => {
     { name: 'medium', color: 'rgba(53,211,156,0.7)' },
     { name: 'large', color: 'rgba(230, 0, 0, 0.7)' },
   ];
+
+  useEffect(() => {
+    if (currentCountryInfo) {
+      const newViewport = {
+        width: '100%',
+        height: '100%',
+        longitude: currentCountryInfo.geometry[1],
+        latitude: currentCountryInfo.geometry[0],
+        zoom: 3,
+        transitionDuration: 1000,
+        transitionInterpolator: new FlyToInterpolator(),
+      };
+
+      setViewport(newViewport);
+    }
+  }, [currentCountryInfo]);
 
   const handleMarkerClick = country => {
     setTooltip(country);
@@ -101,7 +127,7 @@ export const Map = () => {
             {countries.map(country => {
               let size = 15;
               let color = colors[0].color;
-              if (country.TotalConfirmed >= div2) {
+              if (country.Cases >= div2) {
                 size = 55;
                 color = colors[2].color;
               } else if (country.Cases < div2 && country.Cases >= div) {
@@ -130,7 +156,9 @@ export const Map = () => {
               );
             })}
 
-            {tooltip && <Tooltip country={tooltip} />}
+            {tooltip && <Tooltip
+              currentParametr={currentParametr}
+              country={tooltip} />}
 
             <Box className={classes.mapNav}>
               <NavigationControl

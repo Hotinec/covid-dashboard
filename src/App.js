@@ -19,7 +19,6 @@ toast.configure();
 
 function App() {
   const dispatch = useDispatch();
-  const countries = useSelector(selectAllCountries);
   const currentBoard = useSelector(selectCurrentBoard);
   const apiError = useSelector(selectInfoError);
 
@@ -66,8 +65,7 @@ function App() {
       <Header />
       <Box m={1}>
         { renderSwitch(currentBoard) }      
-      </Box>
-      
+      </Box>     
     </div>
   );
 }
