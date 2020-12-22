@@ -94,7 +94,8 @@ export const Map = () => {
 
       setViewport(newViewport);
     }
-  });
+  }, [currentCountryInfo]);
+
   const handleMarkerClick = (country) => {
     setTooltip(country);
     dispatch(setCountry(country.Code));

@@ -125,11 +125,11 @@ export const filter = (parameter, array) => {
       }));
       break;
 
-        default:
-            break
-    }
-    return filtered
-}
+    default:
+      break;
+  }
+  return filtered;
+};
 export const chartFilter = (parameter, array, population) => {
   let filtered;
   switch (parameter) {
@@ -225,47 +225,46 @@ export const chartFilter = (parameter, array, population) => {
           item.total_cases - (arr[index + 1] ? arr[index + 1].total_cases : 0);
         const cases = item.cases - (arr[index + 1] ? arr[index + 1].cases : 0);
 
-                return {
-                    date: item.last_update,
-                    cases:
-                        calculationPer100(totalCases, population) ||
-                        calculationPer100(cases, population),
-                }
-            })
-            break
-        case parameters.lastDayDeaths100:
-            filtered = array.map((item, index, arr) => {
-                const totalCases =
-                    item.total_deaths -
-                    (arr[index + 1] ? arr[index + 1].total_deaths : 0)
-                const cases =
-                    item.deaths - (arr[index + 1] ? arr[index + 1].deaths : 0)
-                return {
-                    date: item.last_update,
-                    cases:
-                        calculationPer100(totalCases, population) ||
-                        calculationPer100(cases, population),
-                }
-            })
-            break
-        case parameters.lastDayRecovered100:
-            filtered = array.map((item, index, arr) => {
-                const totalCases =
-                    item.total_recovered -
-                    (arr[index + 1] ? arr[index + 1].total_recovered : 0)
-                const cases =
-                    item.recovered -
-                    (arr[index + 1] ? arr[index + 1].recovered : 0)
-                return {
-                    date: item.last_update,
-                    cases:
-                        calculationPer100(totalCases, population) ||
-                        calculationPer100(cases, population),
-                }
-            })
-            break
-        default:
-            break
-    }
-    return filtered
-}
+        return {
+          date: item.last_update,
+          cases:
+            calculationPer100(totalCases, population) ||
+            calculationPer100(cases, population),
+        };
+      });
+      break;
+    case parameters.lastDayDeaths100:
+      filtered = array.map((item, index, arr) => {
+        const totalCases =
+          item.total_deaths -
+          (arr[index + 1] ? arr[index + 1].total_deaths : 0);
+        const cases =
+          item.deaths - (arr[index + 1] ? arr[index + 1].deaths : 0);
+        return {
+          date: item.last_update,
+          cases:
+            calculationPer100(totalCases, population) ||
+            calculationPer100(cases, population),
+        };
+      });
+      break;
+    case parameters.lastDayRecovered100:
+      filtered = array.map((item, index, arr) => {
+        const totalCases =
+          item.total_recovered -
+          (arr[index + 1] ? arr[index + 1].total_recovered : 0);
+        const cases =
+          item.recovered - (arr[index + 1] ? arr[index + 1].recovered : 0);
+        return {
+          date: item.last_update,
+          cases:
+            calculationPer100(totalCases, population) ||
+            calculationPer100(cases, population),
+        };
+      });
+      break;
+    default:
+      break;
+  }
+  return filtered;
+};
