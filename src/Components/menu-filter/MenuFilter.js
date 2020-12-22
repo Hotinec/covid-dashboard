@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import Button from '@material-ui/core/Button';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
+import { useStyles } from './styles';
+// import Button from '@material-ui/core/Button';
+// import Menu from '@material-ui/core/Menu';
+import { MenuItem, Menu, Button, Divider } from '@material-ui/core';
 import { parameters } from '../../constants';
 import { setParameter } from '../../redux/parameterSlice';
 
@@ -11,6 +12,7 @@ const options = Object.values(parameters);
 const ITEM_HEIGHT = 48;
 
 export const MenuFilter = () => {
+  const classes = useStyles();
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -20,7 +22,10 @@ export const MenuFilter = () => {
   };
 
   const handleClose = e => {
-    dispatch(setParameter(e.target.firstChild.textContent));
+    if (e.target.firstChild) {
+      dispatch(setParameter(e.target.firstChild.textContent));
+    }
+
     setAnchorEl(null);
   };
 
@@ -31,6 +36,7 @@ export const MenuFilter = () => {
         aria-haspopup="true"
         variant="contained"
         color="primary"
+        className={classes.button}
         onClick={handleClick}
       >
         Cases
@@ -44,17 +50,21 @@ export const MenuFilter = () => {
         PaperProps={{
           style: {
             maxHeight: ITEM_HEIGHT * 4.5,
-            width: '32ch',
+            width: '40ch',
+            backgroundColor: '#ddd',
           },
         }}
       >
         {options.map(option => (
-          <MenuItem
-            key={option}
-            selected={option === 'Pyxis'}
-            onClick={handleClose}
-            children={option}
-          ></MenuItem>
+          <>
+            <MenuItem
+              key={option}
+              selected={option === 'Pyxis'}
+              onClick={handleClose}
+              children={option}
+            ></MenuItem>
+            <Divider />
+          </>
         ))}
       </Menu>
     </div>

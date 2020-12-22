@@ -1,7 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchChartData } from './middlewares';
 import { createSelector } from 'reselect';
-
+import { selectParameter } from './parameterSlice';
+import { chartFilter } from '../utils/filter';
+import { selectGlobalInfo } from './covidInfoSlice';
+import { getCurrentCountryInfo } from './currentCountrySlice';
 const chartInfoSlice = createSlice({
   name: 'chartInfo',
   initialState: {
@@ -25,7 +28,18 @@ const chartInfoSlice = createSlice({
 
 export const getChartData = createSelector(
   state => state.chartInfo.data,
-  data => data,
+  selectParameter,
+  selectGlobalInfo,
+  getCurrentCountryInfo,
+  (data, parameter, globalInfo, curCountryInfo) => {
+    const globalPopulation = globalInfo.worldPopulation;
+    const population = curCountryInfo
+      ? curCountryInfo.population
+      : globalPopulation;
+
+    const filtered = chartFilter(parameter, data, population);
+    return filtered;
+  },
 );
 
 export default chartInfoSlice.reducer;
