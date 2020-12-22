@@ -31,13 +31,12 @@ export const useStyles = makeStyles(theme => ({
     backgroundColor: '#24292e',
     height: '100%',
     border: '1px solid #363636',
-    position: 'relative',
   },
   global: {
     backgroundColor: '#323840',
     color: '#ffffff',
     borderBottom: '1px solid #e60000',
-    minHeight: '87px',
+    height: '30%',
     display: 'flex',
     justifyContent: 'center',
     flexDirection: 'column',
@@ -50,11 +49,8 @@ export const useStyles = makeStyles(theme => ({
     overflowY: 'scroll',
     paddingTop: 0,
     paddingBottom: 0,
-    position: 'absolute',
-    top: 'calc(100% - 260px)',
-    left: 0,
-    right: 0,
-    bottom: 0,
+    height:'70%',
+
   },
   itemCountry: {
     display: 'flex',
@@ -66,12 +62,6 @@ export const useStyles = makeStyles(theme => ({
   },
   itemDivider: {
     backgroundColor: '#363636',
-  },
-  infoList: {
-    overflowY: 'scroll',
-    height: '97.5%',
-    paddingTop: '0',
-    paddingBottom: '0',
   },
   resizeIcon: {
     position: 'absolute',

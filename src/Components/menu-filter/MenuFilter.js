@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useStyles } from './styles';
-// import Button from '@material-ui/core/Button';
-// import Menu from '@material-ui/core/Menu';
-import { MenuItem, Menu, Button, Divider } from '@material-ui/core';
+
+import { MenuItem, Menu, Button } from '@material-ui/core';
 import { parameters } from '../../constants';
 import { setParameter } from '../../redux/parameterSlice';
 
@@ -56,15 +55,16 @@ export const MenuFilter = () => {
         }}
       >
         {options.map(option => (
-          <>
+       
             <MenuItem
               key={option}
               selected={option === 'Pyxis'}
               onClick={handleClose}
               children={option}
-            ></MenuItem>
-            <Divider />
-          </>
+            >
+            </MenuItem>
+            
+ 
         ))}
       </Menu>
     </div>

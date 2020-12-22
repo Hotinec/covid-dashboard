@@ -307,6 +307,5 @@ export const chartFilter = (parameter, array, population) => {
     default:
       break;
   }
-  console.log(filtered);
   return filtered;
 };
