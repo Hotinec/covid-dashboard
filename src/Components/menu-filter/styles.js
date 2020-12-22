@@ -9,8 +9,5 @@ export const useStyles = makeStyles(theme => ({
     padding: 11,
     backgroundColor: '#246dd4',
     color: '#fff',
-  },
-  menuItem: {
-    backgroundColor: '#ddd',
-  },
+  }
 }));
