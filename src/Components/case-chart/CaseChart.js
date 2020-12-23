@@ -6,6 +6,7 @@ import IconButton from "@material-ui/core/IconButton";
 import FullscreenExitIcon from "@material-ui/icons/FullscreenExit";
 import { setBoard, selectCurrentBoard } from "../../redux/currentBoardSlice";
 import { selectParameter } from "../../redux/parameterSlice";
+import IconMenuButton from "../menu-icon-button";
 import { ChartView } from "./Chart";
 import { fetchChartData } from "../../redux/middlewares";
 import { useStyles } from "./styles";
@@ -39,6 +40,7 @@ export const CaseChart = () => {
       className={`${classes.root} ${currentBoard === 5 ? classes.open : ""}`}
       square
     >
+      <IconMenuButton />
       <IconButton
         aria-label="delete"
         className={classes.resizeIcon}

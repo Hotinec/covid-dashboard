@@ -1,9 +1,7 @@
 /* eslint-disable react/no-children-prop */
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
-import { MenuItem, Menu, Button } from "@material-ui/core";
-import { useStyles } from "./styles";
-
+import { MenuItem, Menu } from "@material-ui/core";
 import { parameters } from "../../constants";
 import { setParameter } from "../../redux/parameterSlice";
 
@@ -11,15 +9,9 @@ const options = Object.values(parameters);
 
 const ITEM_HEIGHT = 48;
 
-export const MenuFilter = () => {
-  const classes = useStyles();
+export const MenuFilter = ({ anchorEl, setAnchorEl }) => {
   const dispatch = useDispatch();
-  const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
 
   const handleClose = (e) => {
     if (e.target.firstChild) {
@@ -31,16 +23,6 @@ export const MenuFilter = () => {
 
   return (
     <div>
-      <Button
-        aria-controls="customized-menu"
-        aria-haspopup="true"
-        variant="contained"
-        color="primary"
-        className={classes.button}
-        onClick={handleClick}
-      >
-        Cases
-      </Button>
       <Menu
         id="long-menu"
         anchorEl={anchorEl}

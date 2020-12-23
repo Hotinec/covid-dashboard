@@ -30,6 +30,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import Spinner from "../spinner";
 import Tooltip from "../tooltip";
 import Legend from "../legend";
+import IconMenuButton from "../menu-icon-button";
 import { useStyles } from "./styles";
 
 const TOKEN =
@@ -114,6 +115,7 @@ export const Map = () => {
       className={`${classes.root} ${currentBoard === 3 ? classes.open : ""}`}
       square
     >
+      <IconMenuButton />
       <IconButton
         aria-label="delete"
         className={classes.resizeIcon}
