@@ -1,0 +1,10 @@
+.App {
+  position: relative;
+}
+
+.simple-keyboard {
+  max-width: 850px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}

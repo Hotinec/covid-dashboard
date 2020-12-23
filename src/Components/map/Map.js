@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import ReactMapGL, {
   Marker,
   NavigationControl,
-  Layer,
   FlyToInterpolator,
 } from "react-map-gl";
 import Paper from "@material-ui/core/Paper";

@@ -59,7 +59,7 @@ export class ChartView extends React.Component {
     const mainLabel = title !== "" ? title : "Total cases";
     this.chart.data.labels = chartData.map((country) => {
       const date = new Date(country.date);
-      return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
+      return date;
     });
 
     this.chart.data.datasets[0].data = chartData.map(

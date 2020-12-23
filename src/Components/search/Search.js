@@ -14,16 +14,14 @@ export const Search = () => {
   const inputHandler = debounce((value) => dispatch(setSearch(value)), 500);
 
   return (
-    <Paper component="form" className={classes.root}>
+    <Paper id="Id2" component="form" className={classes.root}>
       <InputBase
         className={classes.input}
         placeholder="Search countries"
         inputProps={{ "aria-label": "search countries" }}
         onChange={(e) => inputHandler(e.target.value)}
       />
-      {/* <IconButton type="submit" className={classes.iconButton} aria-label="search"> */}
       <SearchIcon className={classes.iconButton} />
-      {/* </IconButton> */}
     </Paper>
   );
 };
