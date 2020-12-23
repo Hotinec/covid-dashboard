@@ -5,11 +5,14 @@ import Paper from "@material-ui/core/Paper";
 import { Box } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import FullscreenExitIcon from "@material-ui/icons/FullscreenExit";
+
+import IconMenuButton from "../menu-icon-button";
+import { InfoTable } from "./InfoTable";
+import { GlobalCountries } from "./GlobalCountries";
 import { setBoard, selectCurrentBoard } from "../../redux/currentBoardSlice";
 import { selectGlobalInfo } from "../../redux/covidInfoSlice";
 import { getCurrentCountryInfo } from "../../redux/currentCountrySlice";
-import { GlobalCountries } from "./GlobalCountries";
-import { InfoTable } from "./InfoTable";
+
 import { getParametersArr } from "../../utils/parametersArray";
 
 import { useStyles } from "./styles";
@@ -43,6 +46,7 @@ export const GlobalTable = () => {
       className={`${classes.root} ${currentBoard === 4 ? classes.open : ""}`}
       square
     >
+      <IconMenuButton />
       <IconButton
         aria-label="delete"
         className={classes.resizeIcon}

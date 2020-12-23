@@ -59,7 +59,8 @@ export const useStyles = makeStyles((theme) => ({
     right: 5,
     color: "#888",
     zIndex: 10,
-    border: "1px solid #363636",
+    border: "1px solid #888",
+    backgroundColor: "#1d2225",
     borderRadius: "50%",
   },
 }));

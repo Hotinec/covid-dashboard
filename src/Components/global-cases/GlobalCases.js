@@ -7,6 +7,7 @@ import IconButton from "@material-ui/core/IconButton";
 import FullscreenExitIcon from "@material-ui/icons/FullscreenExit";
 import { setBoard, selectCurrentBoard } from "../../redux/currentBoardSlice";
 import Spinner from "../spinner";
+import IconMenuButton from "../menu-icon-button";
 import { useStyles } from "./styles";
 
 export const GlobalCases = () => {
@@ -38,6 +39,7 @@ export const GlobalCases = () => {
       className={`${classes.root} ${currentBoard === 1 ? classes.open : ""}`}
       square
     >
+      <IconMenuButton />
       <IconButton
         aria-label="delete"
         className={classes.resizeIcon}

@@ -15,6 +15,7 @@ import { filteredQueryCountries } from "../../redux/covidInfoSlice";
 import { setBoard, selectCurrentBoard } from "../../redux/currentBoardSlice";
 import { setCountry } from "../../redux/currentCountrySlice";
 import Spinner from "../spinner";
+import IconMenuButton from "../menu-icon-button";
 
 import { useStyles } from "./styles";
 
@@ -39,6 +40,7 @@ export const CountriesList = () => {
       className={`${classes.root} ${currentBoard === 2 ? classes.open : ""}`}
       square
     >
+      <IconMenuButton />
       <IconButton
         aria-label="delete"
         className={classes.resizeIcon}
