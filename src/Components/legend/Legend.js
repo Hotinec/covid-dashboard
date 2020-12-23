@@ -7,7 +7,7 @@ export const Legend = ({ data }) => {
   return (
     <div className={classes.legend}>
       {data.map((item) => (
-        <div className={classes.legendField} key={classes.legendIcon}>
+        <div className={classes.legendField} key={item.name}>
           <div
             className={classes.legendIcon}
             style={{ backgroundColor: item.color }}

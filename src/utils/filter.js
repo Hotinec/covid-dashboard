@@ -1,7 +1,7 @@
 import { parameters } from "../constants";
 
 export const calculationPer100 = (count, population) =>
-  Math.floor((count * 100000) / population);
+  Math.ceil((count * 100000) / population);
 
 export const filter = (parameter, array) => {
   let filtered;
