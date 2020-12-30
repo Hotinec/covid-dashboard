@@ -70,6 +70,7 @@ export const Map = () => {
   const countries = useSelector(filteredCountries);
   const currentParametr = useSelector(selectParameter);
   const currentCountryInfo = useSelector(getCurrentCountryInfo);
+  const markerSize = useSelector(markerSizeByCountries);
 
   useEffect(() => {
     if (currentCountryInfo) {
@@ -113,12 +114,12 @@ export const Map = () => {
             {countries.map((country) => {
               let size = 15;
               let { color } = MARKER_COLORS[0];
-              if (country.Cases >= markerSizeByCountries.div2) {
+              if (country.Cases >= markerSize.div2) {
                 size = 55;
                 color = MARKER_COLORS[2].color;
               } else if (
-                country.Cases < markerSizeByCountries.div2 &&
-                country.Cases >= markerSizeByCountries.div
+                country.Cases < markerSize.div2 &&
+                country.Cases >= markerSize.div
               ) {
                 size = 35;
                 color = MARKER_COLORS[1].color;
