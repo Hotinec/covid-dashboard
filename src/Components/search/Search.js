@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { debounce } from "lodash";
 import { useDispatch } from "react-redux";
 import Paper from "@material-ui/core/Paper";
@@ -11,7 +11,10 @@ export const Search = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  const inputHandler = debounce((value) => dispatch(setSearch(value)), 500);
+  const inputHandler = useMemo(
+    () => debounce((value) => dispatch(setSearch(value)), 500),
+    [dispatch]
+  );
 
   return (
     <Paper id="Id2" component="form" className={classes.root}>

@@ -10,11 +10,8 @@ import IconMenuButton from "../menu-icon-button";
 import { InfoTable } from "./InfoTable";
 import { GlobalCountries } from "./GlobalCountries";
 import { selectCurrentBoard } from "../../redux/currentBoardSlice";
-import { selectGlobalInfo } from "../../redux/covidInfoSlice";
-import { getCurrentCountryInfo } from "../../redux/currentCountrySlice";
+import { getParameterInfo } from "../../redux/currentCountrySlice";
 import { useResizeSwitch } from "../../hooks/useResizeSwitch";
-
-import { getParametersArr } from "../../utils/parametersArray";
 
 import { useStyles } from "./styles";
 
@@ -22,15 +19,7 @@ export const GlobalTable = () => {
   const classes = useStyles();
 
   const currentBoard = useSelector(selectCurrentBoard);
-  const globalInfo = useSelector(selectGlobalInfo);
-  const currentCountryInfo = useSelector(getCurrentCountryInfo);
-
-  let parametersInfo;
-  if (currentCountryInfo) {
-    parametersInfo = getParametersArr(currentCountryInfo);
-  } else {
-    parametersInfo = getParametersArr(globalInfo);
-  }
+  const parameterInfo = useSelector(getParameterInfo);
   const resizeClickHandler = useResizeSwitch(4);
 
   return (
@@ -52,8 +41,8 @@ export const GlobalTable = () => {
         display="flex"
         justifyContent="space-between"
       >
-        <GlobalCountries paramInfo={parametersInfo} />
-        <InfoTable paramInfo={parametersInfo} />
+        <GlobalCountries paramInfo={parameterInfo} />
+        <InfoTable paramInfo={parameterInfo} />
       </Box>
     </Paper>
   );

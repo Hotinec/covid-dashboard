@@ -1,5 +1,5 @@
 /* eslint-disable consistent-return */
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Paper from "@material-ui/core/Paper";
 import {
@@ -32,9 +32,11 @@ export const GlobalCountries = () => {
   const parameter = useSelector(selectParameter);
   const sign = useSelector(signByParameter);
 
-  if (countries.length === 1) {
-    dispatch(setCountry(countries[0].Code));
-  }
+  useEffect(() => {
+    if (countries.length === 1) {
+      dispatch(setCountry(countries[0].Code));
+    }
+  });
 
   return (
     <Paper className={classes.wrapperCountries} variant="outlined" square>
