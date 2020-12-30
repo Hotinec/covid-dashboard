@@ -101,8 +101,9 @@ export const filteredQueryCountries = createSelector(
     const reg = new RegExp(`${query}`, "gi");
     const filtered = countries.filter((country) => country.Country.match(reg));
     const filteredByParameter = filter(parameter, filtered);
-
-    return filteredByParameter;
+    return filteredByParameter.sort(
+      (country1, country2) => country2.Cases - country1.Cases
+    );
   }
 );
 

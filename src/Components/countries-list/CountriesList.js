@@ -56,52 +56,50 @@ export const CountriesList = () => {
         <Box className={classes.wraper}>
           <Typography className={classes.title}>Cases by Country</Typography>
           <List className={classes.list}>
-            {countries
-              .sort((country1, country2) => country2.Cases - country1.Cases)
-              .map((country) => (
-                <React.Fragment key={country.Code}>
-                  <ListItem
-                    onClick={() => dispatch(setCountry(country.Code))}
-                    button
-                  >
-                    <ListItemText
-                      primary={
-                        <Typography
-                          style={{
-                            color: "#e60000",
-                            fontSize: "16px",
-                            fontWeight: "bold",
-                          }}
-                        >
-                          {country.Cases}
-                        </Typography>
-                      }
-                    />
-                    <ListItemText
-                      classes={{ root: classes.countryName }}
-                      primary={
-                        <Typography
-                          style={{ color: "#d6d6d6", fontSize: "16px" }}
-                        >
-                          {country.Country === "United States of America"
-                            ? "USA"
-                            : country.Country}
-                        </Typography>
-                      }
-                    />
-                    <ListItemIcon className={classes.itemIcon}>
-                      <Icon classes={{ root: classes.iconRoot }}>
-                        <img
-                          className={classes.imageIcon}
-                          src={country.Flag}
-                          alt={country.Code}
-                        />
-                      </Icon>
-                    </ListItemIcon>
-                  </ListItem>
-                  <Divider classes={{ root: classes.divider }} component="li" />
-                </React.Fragment>
-              ))}
+            {countries.map((country) => (
+              <React.Fragment key={country.Code}>
+                <ListItem
+                  onClick={() => dispatch(setCountry(country.Code))}
+                  button
+                >
+                  <ListItemText
+                    primary={
+                      <Typography
+                        style={{
+                          color: "#e60000",
+                          fontSize: "16px",
+                          fontWeight: "bold",
+                        }}
+                      >
+                        {country.Cases}
+                      </Typography>
+                    }
+                  />
+                  <ListItemText
+                    classes={{ root: classes.countryName }}
+                    primary={
+                      <Typography
+                        style={{ color: "#d6d6d6", fontSize: "16px" }}
+                      >
+                        {country.Country === "United States of America"
+                          ? "USA"
+                          : country.Country}
+                      </Typography>
+                    }
+                  />
+                  <ListItemIcon className={classes.itemIcon}>
+                    <Icon classes={{ root: classes.iconRoot }}>
+                      <img
+                        className={classes.imageIcon}
+                        src={country.Flag}
+                        alt={country.Code}
+                      />
+                    </Icon>
+                  </ListItemIcon>
+                </ListItem>
+                <Divider classes={{ root: classes.divider }} component="li" />
+              </React.Fragment>
+            ))}
           </List>
         </Box>
       ) : (
