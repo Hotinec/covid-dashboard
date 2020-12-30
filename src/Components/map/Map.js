@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/style-prop-object */
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ReactMapGL, {
   Marker,
@@ -46,7 +46,7 @@ export const Map = () => {
     zoom: 1,
   });
 
-  window.addEventListener("resize", () => {
+  const resizeListener = useCallback(() => {
     setViewport({
       width: "100%",
       height: "100%",
@@ -54,7 +54,14 @@ export const Map = () => {
       longitude: 0,
       zoom: 1,
     });
-  });
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("resize", resizeListener);
+    return () => {
+      window.removeEventListener("resize", resizeListener);
+    };
+  }, [resizeListener]);
 
   const dispatch = useDispatch();
   const classes = useStyles();

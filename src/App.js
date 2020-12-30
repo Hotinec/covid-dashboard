@@ -5,7 +5,6 @@ import Box from "@material-ui/core/Box";
 import { fetchCovidInfo } from "./redux/middlewares";
 import Header from "./Components/header";
 import Dashboard from "./pages/dashboard";
-// import { selectInfoError } from "./redux/covidInfoSlice";
 import GlobalCases from "./Components/global-cases";
 import CountiesList from "./Components/countries-list";
 import Map from "./Components/map";
@@ -17,7 +16,6 @@ import "react-toastify/dist/ReactToastify.css";
 function App() {
   const dispatch = useDispatch();
   const currentBoard = useSelector(selectCurrentBoard);
-  // const apiError = useSelector(selectInfoError);
 
   useEffect(() => {
     dispatch(fetchCovidInfo());
