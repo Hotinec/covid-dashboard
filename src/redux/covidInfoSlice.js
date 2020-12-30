@@ -51,10 +51,17 @@ export const selectGlobalInfo = createSelector(
   (state) => state.covidInfo.Global,
   (global) => global
 );
+
 export const selectInfoLoader = createSelector(
   (state) => state.covidInfo.loading,
   (loading) => loading
 );
+
+export const selectInfoDate = createSelector(
+  (state) => state.covidInfo.Date,
+  (Date) => Date
+);
+
 export const selectInfoError = createSelector(
   (state) => state.covidInfo.error,
   (error) => error
