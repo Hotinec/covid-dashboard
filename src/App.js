@@ -1,10 +1,6 @@
-/* eslint-disable no-return-assign */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-shadow */
-/* eslint-disable react/react-in-jsx-scope */
 import "./App.css";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect } from "react";
 import Box from "@material-ui/core/Box";
 import { toast } from "react-toastify";
 import { fetchCovidInfo } from "./redux/middlewares";
