@@ -15,6 +15,7 @@ import FullscreenExitIcon from "@material-ui/icons/FullscreenExit";
 import {
   setCountry,
   selectCurrentCountry,
+  getCurrentCountryInfo,
 } from "../../redux/currentCountrySlice";
 import {
   filteredCountries,
@@ -70,9 +71,7 @@ export const Map = () => {
   const countries = useSelector(filteredCountries);
   const currentParametr = useSelector(selectParameter);
   const currentCountry = useSelector(selectCurrentCountry);
-  const currentCountryInfo = useSelector((state) =>
-    selectCountryById(state, currentCountry)
-  );
+  const currentCountryInfo = useSelector(getCurrentCountryInfo);
 
   const counts = countries.map((country) => country.Cases);
   const maxCount = Math.max(...counts);
