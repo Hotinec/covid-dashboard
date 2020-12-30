@@ -102,11 +102,6 @@ export const Map = () => {
     }
   }, [currentCountryInfo]);
 
-  const handleMarkerClick = (country) => {
-    setTooltip(country);
-    dispatch(setCountry(country.Code));
-  };
-
   const resizeClickHandler = (e) => {
     if (currentBoard === 3) {
       dispatch(setBoard(0));
