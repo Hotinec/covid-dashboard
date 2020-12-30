@@ -14,6 +14,7 @@ import {
 import { useStyles } from "./styles";
 import { selectInfoLoader } from "../../redux/covidInfoSlice";
 import { getCurrentCountryInfo } from "../../redux/currentCountrySlice";
+import { LOADER_STATES } from "../../constants";
 
 import Spinner from "../spinner";
 
@@ -24,7 +25,7 @@ export const InfoTable = (props) => {
 
   return (
     <Paper className={classes.wrapperCountries} variant="outlined" square>
-      {isLoaded === "idle" && (
+      {isLoaded === LOADER_STATES.IDLE && (
         <>
           <Box className={classes.global}>
             <Typography className={classes.title} align="center">
@@ -67,7 +68,7 @@ export const InfoTable = (props) => {
           </List>
         </>
       )}
-      {isLoaded === "pending" && <Spinner />}
+      {isLoaded === LOADER_STATES.LOADING && <Spinner />}
     </Paper>
   );
 };

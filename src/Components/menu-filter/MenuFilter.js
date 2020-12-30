@@ -2,10 +2,10 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { MenuItem, Menu } from "@material-ui/core";
-import { parameters } from "../../constants";
+import { PARAMETERS } from "../../constants";
 import { setParameter } from "../../redux/parameterSlice";
 
-const options = Object.values(parameters);
+const options = Object.values(PARAMETERS);
 
 const ITEM_HEIGHT = 48;
 
@@ -40,10 +40,11 @@ export const MenuFilter = ({ anchorEl, setAnchorEl }) => {
         {options.map((option) => (
           <MenuItem
             key={option}
-            selected={option === "Pyxis"}
+            selected={option === "true"}
             onClick={handleClose}
-            children={option}
-          />
+          >
+            {option}
+          </MenuItem>
         ))}
       </Menu>
     </div>

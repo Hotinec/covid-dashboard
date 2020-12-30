@@ -16,6 +16,7 @@ import { useResizeSwitch } from "../../hooks/useResizeSwitch";
 import Spinner from "../spinner";
 import IconMenuButton from "../menu-icon-button";
 import { useStyles } from "./styles";
+import { LOADER_STATES } from "../../constants";
 
 export const GlobalCases = () => {
   const classes = useStyles();
@@ -44,7 +45,7 @@ export const GlobalCases = () => {
       >
         <FullscreenExitIcon fontSize="inherit" />
       </IconButton>
-      {isLoaded === "idle" ? (
+      {isLoaded === LOADER_STATES.IDLE ? (
         <Box>
           <Typography
             className={`${classes.caseTitle} ${

@@ -20,10 +20,9 @@ import { useResizeSwitch } from "../../hooks/useResizeSwitch";
 import { setCountry } from "../../redux/currentCountrySlice";
 import Spinner from "../spinner";
 import IconMenuButton from "../menu-icon-button";
+import { LOADER_STATES } from "../../constants";
 
 import { useStyles } from "./styles";
-
-const ISLOADED = "idle";
 
 export const CountriesList = () => {
   const dispatch = useDispatch();
@@ -47,7 +46,7 @@ export const CountriesList = () => {
       >
         <FullscreenExitIcon fontSize="inherit" />
       </IconButton>
-      {isLoaded === ISLOADED ? (
+      {isLoaded === LOADER_STATES.IDLE ? (
         <Box className={classes.wraper}>
           <Typography className={classes.title}>Cases by Country</Typography>
           <List className={classes.list}>

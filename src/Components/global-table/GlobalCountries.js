@@ -18,8 +18,8 @@ import {
 } from "../../redux/covidInfoSlice";
 
 import { setCountry } from "../../redux/currentCountrySlice";
-import { selectParameter } from "../../redux/parameterSlice";
-import { parameters } from "../../constants";
+import { selectParameter, signByParameter } from "../../redux/parameterSlice";
+import { PARAMETERS, LOADER_STATES } from "../../constants";
 import Spinner from "../spinner";
 
 export const GlobalCountries = () => {
@@ -30,45 +30,19 @@ export const GlobalCountries = () => {
   const countries = useSelector(filteredQueryCountries);
   const globalCases = useSelector(selectGlobalInfo).TotalDeaths;
   const parameter = useSelector(selectParameter);
+  const sign = useSelector(signByParameter);
 
   if (countries.length === 1) {
     dispatch(setCountry(countries[0].Code));
   }
-  const changeSign = () => {
-    if (
-      parameter === "" ||
-      parameter === parameters.totalCases ||
-      parameter === parameters.lastDayCases ||
-      parameter === parameters.totalCases100 ||
-      parameter === parameters.lastDayCases100
-    ) {
-      return "confirmed";
-    }
-    if (
-      parameter === parameters.totalDeaths ||
-      parameter === parameters.lastDayDeaths ||
-      parameter === parameters.totalDeath100 ||
-      parameter === parameters.lastDayDeaths100
-    ) {
-      return "deaths";
-    }
-    if (
-      parameter === parameters.totalRecovered ||
-      parameter === parameters.lastDayRecovered ||
-      parameter === parameters.totalRecovered100 ||
-      parameter === parameters.lastDayRecovered100
-    ) {
-      return "recovered";
-    }
-  };
 
   return (
     <Paper className={classes.wrapperCountries} variant="outlined" square>
-      {isLoaded === "idle" && (
+      {isLoaded === LOADER_STATES.IDLE && (
         <>
           <Box className={classes.global}>
             <Typography className={classes.title} align="center">
-              {parameter || "Total cases"}
+              {parameter || PARAMETERS.totalCases}
             </Typography>
             <Typography className={classes.globalCases} align="center">
               {globalCases}
@@ -105,7 +79,7 @@ export const GlobalCountries = () => {
                           display: "inline",
                         }}
                       >
-                        {changeSign()}
+                        {sign}
                       </Typography>
                     }
                   />
@@ -129,7 +103,7 @@ export const GlobalCountries = () => {
           </List>
         </>
       )}
-      {isLoaded === "pending" && <Spinner />}
+      {isLoaded === LOADER_STATES.LOADING && <Spinner />}
     </Paper>
   );
 };

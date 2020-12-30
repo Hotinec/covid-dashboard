@@ -1,4 +1,4 @@
-import { parameters } from "../constants";
+import { PARAMETERS } from "../constants";
 
 export const calculationPer100 = (count, population) =>
   Math.ceil((count * 100000) / population);
@@ -15,7 +15,7 @@ export const filter = (parameter, array) => {
         Geometry: country.geometry,
       }));
       break;
-    case parameters.totalCases:
+    case PARAMETERS.totalCases:
       filtered = array.map((country) => ({
         Country: country.Country,
         Cases: country.TotalConfirmed,
@@ -24,7 +24,7 @@ export const filter = (parameter, array) => {
         Geometry: country.geometry,
       }));
       break;
-    case parameters.totalDeaths:
+    case PARAMETERS.totalDeaths:
       filtered = array.map((country) => ({
         Country: country.Country,
         Cases: country.TotalDeaths,
@@ -34,7 +34,7 @@ export const filter = (parameter, array) => {
       }));
 
       break;
-    case parameters.totalRecovered:
+    case PARAMETERS.totalRecovered:
       filtered = array.map((country) => ({
         Country: country.Country,
         Cases: country.TotalRecovered,
@@ -43,7 +43,7 @@ export const filter = (parameter, array) => {
         Geometry: country.geometry,
       }));
       break;
-    case parameters.lastDayCases:
+    case PARAMETERS.lastDayCases:
       filtered = array.map((country) => ({
         Country: country.Country,
         Cases: country.NewConfirmed,
@@ -52,7 +52,7 @@ export const filter = (parameter, array) => {
         Geometry: country.geometry,
       }));
       break;
-    case parameters.lastDayDeaths:
+    case PARAMETERS.lastDayDeaths:
       filtered = array.map((country) => ({
         Country: country.Country,
         Cases: country.NewDeaths,
@@ -61,7 +61,7 @@ export const filter = (parameter, array) => {
         Geometry: country.geometry,
       }));
       break;
-    case parameters.lastDayRecovered:
+    case PARAMETERS.lastDayRecovered:
       filtered = array.map((country) => ({
         Country: country.Country,
         Cases: country.NewRecovered,
@@ -70,7 +70,7 @@ export const filter = (parameter, array) => {
         Geometry: country.geometry,
       }));
       break;
-    case parameters.totalCases100:
+    case PARAMETERS.totalCases100:
       filtered = array.map((country) => ({
         Country: country.Country,
         Cases: calculationPer100(country.TotalConfirmed, country.population),
@@ -79,7 +79,7 @@ export const filter = (parameter, array) => {
         Geometry: country.geometry,
       }));
       break;
-    case parameters.totalDeath100:
+    case PARAMETERS.totalDeath100:
       filtered = array.map((country) => ({
         Country: country.Country,
         Cases: calculationPer100(country.TotalDeaths, country.population),
@@ -88,7 +88,7 @@ export const filter = (parameter, array) => {
         Geometry: country.geometry,
       }));
       break;
-    case parameters.totalRecovered100:
+    case PARAMETERS.totalRecovered100:
       filtered = array.map((country) => ({
         Country: country.Country,
         Cases: calculationPer100(country.TotalRecovered, country.population),
@@ -97,7 +97,7 @@ export const filter = (parameter, array) => {
         Geometry: country.geometry,
       }));
       break;
-    case parameters.lastDayCases100:
+    case PARAMETERS.lastDayCases100:
       filtered = array.map((country) => ({
         Country: country.Country,
         Cases: calculationPer100(country.NewConfirmed, country.population),
@@ -106,7 +106,7 @@ export const filter = (parameter, array) => {
         Geometry: country.geometry,
       }));
       break;
-    case parameters.lastDayDeaths100:
+    case PARAMETERS.lastDayDeaths100:
       filtered = array.map((country) => ({
         Country: country.Country,
         Cases: calculationPer100(country.NewDeaths, country.population),
@@ -115,7 +115,7 @@ export const filter = (parameter, array) => {
         Geometry: country.geometry,
       }));
       break;
-    case parameters.lastDayRecovered100:
+    case PARAMETERS.lastDayRecovered100:
       filtered = array.map((country) => ({
         Country: country.Country,
         Cases: calculationPer100(country.NewRecovered, country.population),
@@ -139,25 +139,25 @@ export const chartFilter = (parameter, array, population) => {
         cases: item.total_cases || item.cases,
       }));
       break;
-    case parameters.totalCases:
+    case PARAMETERS.totalCases:
       filtered = array.map((item) => ({
         date: item.last_update,
         cases: item.total_cases || item.cases,
       }));
       break;
-    case parameters.totalDeaths:
+    case PARAMETERS.totalDeaths:
       filtered = array.map((item) => ({
         date: item.last_update,
         cases: item.total_deaths || item.deaths,
       }));
       break;
-    case parameters.totalRecovered:
+    case PARAMETERS.totalRecovered:
       filtered = array.map((item) => ({
         date: item.last_update,
         cases: item.total_recovered || item.recovered,
       }));
       break;
-    case parameters.lastDayCases:
+    case PARAMETERS.lastDayCases:
       filtered = array.map((item, index, arr) => {
         const totalCases =
           item.total_cases - (arr[index + 1] ? arr[index + 1].total_cases : 0);
@@ -169,7 +169,7 @@ export const chartFilter = (parameter, array, population) => {
         };
       });
       break;
-    case parameters.lastDayDeaths:
+    case PARAMETERS.lastDayDeaths:
       filtered = array.map((item, index, arr) => {
         const totalCases =
           item.total_deaths -
@@ -182,7 +182,7 @@ export const chartFilter = (parameter, array, population) => {
         };
       });
       break;
-    case parameters.lastDayRecovered:
+    case PARAMETERS.lastDayRecovered:
       filtered = array.map((item, index, arr) => {
         const totalCases =
           item.total_recovered -
@@ -195,7 +195,7 @@ export const chartFilter = (parameter, array, population) => {
         };
       });
       break;
-    case parameters.totalCases100:
+    case PARAMETERS.totalCases100:
       filtered = array.map((item) => ({
         date: item.last_update,
         cases:
@@ -203,7 +203,7 @@ export const chartFilter = (parameter, array, population) => {
           calculationPer100(item.cases, population),
       }));
       break;
-    case parameters.totalDeath100:
+    case PARAMETERS.totalDeath100:
       filtered = array.map((item) => ({
         date: item.last_update,
         cases:
@@ -211,7 +211,7 @@ export const chartFilter = (parameter, array, population) => {
           calculationPer100(item.deaths, population),
       }));
       break;
-    case parameters.totalRecovered100:
+    case PARAMETERS.totalRecovered100:
       filtered = array.map((item) => ({
         date: item.last_update,
         cases:
@@ -219,7 +219,7 @@ export const chartFilter = (parameter, array, population) => {
           calculationPer100(item.recovered, population),
       }));
       break;
-    case parameters.lastDayCases100:
+    case PARAMETERS.lastDayCases100:
       filtered = array.map((item, index, arr) => {
         const totalCases =
           item.total_cases - (arr[index + 1] ? arr[index + 1].total_cases : 0);
@@ -233,7 +233,7 @@ export const chartFilter = (parameter, array, population) => {
         };
       });
       break;
-    case parameters.lastDayDeaths100:
+    case PARAMETERS.lastDayDeaths100:
       filtered = array.map((item, index, arr) => {
         const totalCases =
           item.total_deaths -
@@ -248,7 +248,7 @@ export const chartFilter = (parameter, array, population) => {
         };
       });
       break;
-    case parameters.lastDayRecovered100:
+    case PARAMETERS.lastDayRecovered100:
       filtered = array.map((item, index, arr) => {
         const totalCases =
           item.total_recovered -

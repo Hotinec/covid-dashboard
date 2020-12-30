@@ -7,22 +7,23 @@ import { selectParameter } from "./parameterSlice";
 import { chartFilter } from "../utils/filter";
 import { selectGlobalInfo } from "./covidInfoSlice";
 import { getCurrentCountryInfo } from "./currentCountrySlice";
+import { LOADER_STATES, SLICES_NAMES } from "../constants";
 
 const chartInfoSlice = createSlice({
-  name: "chartInfo",
+  name: SLICES_NAMES.CHART_INFO,
   initialState: {
-    loading: "idle",
+    loading: LOADER_STATES.IDLE,
     data: [],
   },
   extraReducers: {
     [fetchChartData.pending]: (state) => {
-      if (state.loading === "idle") {
-        state.loading = "loading";
+      if (state.loading === LOADER_STATES.IDLE) {
+        state.loading = LOADER_STATES.LOADING;
       }
     },
     [fetchChartData.fulfilled]: (state, action) => {
-      if (state.loading === "loading") {
-        state.loading = "idle";
+      if (state.loading === LOADER_STATES.LOADING) {
+        state.loading = LOADER_STATES.IDLE;
       }
       state.data = action.payload;
     },
@@ -30,7 +31,7 @@ const chartInfoSlice = createSlice({
 });
 
 export const getChartData = createSelector(
-  (state) => state.chartInfo.data,
+  (state) => state[SLICES_NAMES.CHART_INFO].data,
   selectParameter,
   selectGlobalInfo,
   getCurrentCountryInfo,

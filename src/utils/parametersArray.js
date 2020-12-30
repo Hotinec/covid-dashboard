@@ -1,51 +1,51 @@
-import { parameters } from "../constants";
+import { PARAMETERS } from "../constants";
 import { calculationPer100 } from "./filter";
 
 export const getParametersArr = (info) => {
   const parametersArray = [
-    [parameters.totalCases, info.TotalConfirmed],
-    [parameters.totalDeaths, info.TotalDeaths],
-    [parameters.totalRecovered, info.TotalRecovered],
-    [parameters.lastDayCases, info.NewConfirmed],
-    [parameters.lastDayDeaths, info.NewDeath],
-    [parameters.lastDayRecovered, info.NewRecovered],
+    [PARAMETERS.totalCases, info.TotalConfirmed],
+    [PARAMETERS.totalDeaths, info.TotalDeaths],
+    [PARAMETERS.totalRecovered, info.TotalRecovered],
+    [PARAMETERS.lastDayCases, info.NewConfirmed],
+    [PARAMETERS.lastDayDeaths, info.NewDeath],
+    [PARAMETERS.lastDayRecovered, info.NewRecovered],
     [
-      parameters.totalCases100,
+      PARAMETERS.totalCases100,
       calculationPer100(
         info.TotalConfirmed,
         info.population || info.worldPopulation
       ),
     ],
     [
-      parameters.totalDeath100,
+      PARAMETERS.totalDeath100,
       calculationPer100(
         info.TotalDeaths,
         info.population || info.worldPopulation
       ),
     ],
     [
-      parameters.totalRecovered100,
+      PARAMETERS.totalRecovered100,
       calculationPer100(
         info.TotalRecovered,
         info.population || info.worldPopulation
       ),
     ],
     [
-      parameters.lastDayCases100,
+      PARAMETERS.lastDayCases100,
       calculationPer100(
         info.NewConfirmed,
         info.population || info.worldPopulation
       ),
     ],
     [
-      parameters.lastDayDeaths100,
+      PARAMETERS.lastDayDeaths100,
       calculationPer100(
         info.NewDeaths,
         info.population || info.worldPopulation
       ),
     ],
     [
-      parameters.lastDayRecovered100,
+      PARAMETERS.lastDayRecovered100,
       calculationPer100(
         info.NewRecovered,
         info.population || info.worldPopulation

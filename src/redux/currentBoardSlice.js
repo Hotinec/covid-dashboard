@@ -1,9 +1,10 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { createSlice } from "@reduxjs/toolkit";
 import { createSelector } from "reselect";
+import { SLICES_NAMES } from "../constants";
 
 const currentBoardSlice = createSlice({
-  name: "currentBoard",
+  name: SLICES_NAMES.CURRENT_BOARD,
   initialState: 0,
   reducers: {
     setBoard: (state, action) => {
@@ -14,7 +15,7 @@ const currentBoardSlice = createSlice({
 });
 
 export const selectCurrentBoard = createSelector(
-  (state) => state.currentBoard,
+  (state) => state[SLICES_NAMES.CURRENT_BOARD],
   (board) => board
 );
 

@@ -2,9 +2,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createSelector } from "reselect";
 import { selectCountryById } from "./covidInfoSlice";
+import { SLICES_NAMES } from "../constants";
 
 const currentCountrySlice = createSlice({
-  name: "currentCountry",
+  name: SLICES_NAMES.CURRENT_COUNTRY,
   initialState: "",
   reducers: {
     setCountry: (state, action) => {
@@ -15,12 +16,12 @@ const currentCountrySlice = createSlice({
 });
 
 export const selectCurrentCountry = createSelector(
-  (state) => state.currentCountry,
+  (state) => state[SLICES_NAMES.CURRENT_COUNTRY],
   (country) => country
 );
 export const getCurrentCountryInfo = createSelector(
   (state) => state,
-  (state) => selectCountryById(state, state.currentCountry)
+  (state) => selectCountryById(state, state[SLICES_NAMES.CURRENT_COUNTRY])
 );
 
 export const { setCountry } = currentCountrySlice.actions;

@@ -3,8 +3,10 @@ import { createSlice, createEntityAdapter } from "@reduxjs/toolkit";
 import { createSelector } from "reselect";
 import { fetchCovidInfo } from "./middlewares";
 import { selectSearch } from "./searchSlice";
+
 import { selectParameter } from "./parameterSlice";
 import { filter } from "../utils/filter";
+import { LOADER_STATES, SLICES_NAMES } from "../constants";
 
 export const countriesAdapter = createEntityAdapter({
   selectId: (country) => country.CountryCode,
@@ -13,12 +15,12 @@ export const countriesAdapter = createEntityAdapter({
 const initialState = countriesAdapter.getInitialState({
   Global: {},
   Date: "",
-  loading: "idle",
+  loading: LOADER_STATES.IDLE,
   error: false,
 });
 
 const covidInfoSlice = createSlice({
-  name: "covidInfo",
+  name: SLICES_NAMES.COVID_INFO,
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -26,19 +28,19 @@ const covidInfoSlice = createSlice({
       if (state.error === true) {
         state.error = false;
       }
-      if (state.loading === "idle") {
-        state.loading = "pending";
+      if (state.loading === LOADER_STATES.IDLE) {
+        state.loading = LOADER_STATES.LOADING;
       }
     });
     builder.addCase(fetchCovidInfo.fulfilled, (state, { payload }) => {
       state.Date = payload.Date;
       state.Global = payload.Global;
-      state.loading = "idle";
+      state.loading = LOADER_STATES.IDLE;
       countriesAdapter.upsertMany(state, payload.Countries);
     });
     builder.addCase(fetchCovidInfo.rejected, (state) => {
-      if (state.loading === "idle") {
-        state.loading = "pending";
+      if (state.loading === LOADER_STATES.IDLE) {
+        state.loading = LOADER_STATES.LOADING;
       }
       if (state.error === false) {
         state.error = true;
@@ -46,25 +48,26 @@ const covidInfoSlice = createSlice({
     });
   },
 });
+const getCovidInfoState = (state) => state[SLICES_NAMES.COVID_INFO];
 
 export const selectGlobalInfo = createSelector(
-  (state) => state.covidInfo.Global,
-  (global) => global
+  getCovidInfoState,
+  (covidInfo) => covidInfo.Global
 );
 
 export const selectInfoLoader = createSelector(
-  (state) => state.covidInfo.loading,
-  (loading) => loading
+  getCovidInfoState,
+  (covidInfo) => covidInfo.loading
 );
 
 export const selectInfoDate = createSelector(
-  (state) => state.covidInfo.Date,
-  (Date) => Date
+  getCovidInfoState,
+  (covidInfo) => covidInfo.Date
 );
 
 export const selectInfoError = createSelector(
-  (state) => state.covidInfo.error,
-  (error) => error
+  getCovidInfoState,
+  (covidInfo) => covidInfo.error
 );
 
 export const {
@@ -73,7 +76,7 @@ export const {
   selectEntities: selectCountryEntities,
   selectAll: selectAllCountries,
   selectTotal: selectTotalCountries,
-} = countriesAdapter.getSelectors((state) => state.covidInfo);
+} = countriesAdapter.getSelectors(getCovidInfoState);
 
 export const filteredCountries = createSelector(
   selectAllCountries,

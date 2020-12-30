@@ -14,14 +14,12 @@ import IconButton from "@material-ui/core/IconButton";
 import FullscreenExitIcon from "@material-ui/icons/FullscreenExit";
 import {
   setCountry,
-  selectCurrentCountry,
   getCurrentCountryInfo,
 } from "../../redux/currentCountrySlice";
 import {
   markerSizeByCountries,
   filteredCountries,
   selectInfoLoader,
-  selectCountryById,
 } from "../../redux/covidInfoSlice";
 import { useResizeSwitch } from "../../hooks/useResizeSwitch";
 
@@ -35,9 +33,7 @@ import Tooltip from "../tooltip";
 import Legend from "../legend";
 import IconMenuButton from "../menu-icon-button";
 import { useStyles } from "./styles";
-
-const TOKEN =
-  "pk.eyJ1IjoiY2hvdGluZWMiLCJhIjoiY2s1dXIxbDEyMDNqazNybGwzcTBydmdybyJ9.E0ZzR-BquMw7y5WGatf6XQ";
+import { LOADER_STATES, MARKER_COLORS, TOKEN } from "../../constants";
 
 export const Map = () => {
   const [tooltip, setTooltip] = useState(null);
@@ -73,14 +69,7 @@ export const Map = () => {
   const isLoaded = useSelector(selectInfoLoader);
   const countries = useSelector(filteredCountries);
   const currentParametr = useSelector(selectParameter);
-  const currentCountry = useSelector(selectCurrentCountry);
   const currentCountryInfo = useSelector(getCurrentCountryInfo);
-
-  const colors = [
-    { name: "weak", color: "rgba(5, 155, 247, 0.7)" },
-    { name: "medium", color: "rgba(53,211,156,0.7)" },
-    { name: "large", color: "rgba(230, 0, 0, 0.7)" },
-  ];
 
   useEffect(() => {
     if (currentCountryInfo) {
@@ -112,9 +101,9 @@ export const Map = () => {
       >
         <FullscreenExitIcon fontSize="inherit" />
       </IconButton>
-      {isLoaded === "idle" ? (
+      {isLoaded === LOADER_STATES.IDLE ? (
         <>
-          <Legend data={colors} />
+          <Legend data={MARKER_COLORS} />
           <ReactMapGL
             {...viewport}
             mapboxApiAccessToken={TOKEN}
@@ -123,16 +112,16 @@ export const Map = () => {
           >
             {countries.map((country) => {
               let size = 15;
-              let { color } = colors[0];
+              let { color } = MARKER_COLORS[0];
               if (country.Cases >= markerSizeByCountries.div2) {
                 size = 55;
-                color = colors[2].color;
+                color = MARKER_COLORS[2].color;
               } else if (
                 country.Cases < markerSizeByCountries.div2 &&
                 country.Cases >= markerSizeByCountries.div
               ) {
                 size = 35;
-                color = colors[1].color;
+                color = MARKER_COLORS[1].color;
               }
 
               return (
