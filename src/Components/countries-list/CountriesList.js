@@ -11,7 +11,10 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import FullscreenExitIcon from "@material-ui/icons/FullscreenExit";
-import { filteredQueryCountries } from "../../redux/covidInfoSlice";
+import {
+  filteredQueryCountries,
+  selectInfoLoader,
+} from "../../redux/covidInfoSlice";
 import { setBoard, selectCurrentBoard } from "../../redux/currentBoardSlice";
 import { setCountry } from "../../redux/currentCountrySlice";
 import Spinner from "../spinner";
@@ -23,7 +26,7 @@ export const CountriesList = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const currentBoard = useSelector(selectCurrentBoard);
-  const isLoaded = useSelector((state) => state.covidInfo.loading);
+  const isLoaded = useSelector(selectInfoLoader);
   const countries = useSelector(filteredQueryCountries);
 
   const resizeClickHandler = () => {
