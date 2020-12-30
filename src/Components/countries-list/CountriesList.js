@@ -15,7 +15,8 @@ import {
   filteredQueryCountries,
   selectInfoLoader,
 } from "../../redux/covidInfoSlice";
-import { setBoard, selectCurrentBoard } from "../../redux/currentBoardSlice";
+import { selectCurrentBoard } from "../../redux/currentBoardSlice";
+import { useResizeSwitch } from "../../hooks/useResizeSwitch";
 import { setCountry } from "../../redux/currentCountrySlice";
 import Spinner from "../spinner";
 import IconMenuButton from "../menu-icon-button";
@@ -30,15 +31,7 @@ export const CountriesList = () => {
   const currentBoard = useSelector(selectCurrentBoard);
   const isLoaded = useSelector(selectInfoLoader);
   const countries = useSelector(filteredQueryCountries);
-
-  const resizeClickHandler = () => {
-    if (currentBoard === 2) {
-      dispatch(setBoard(0));
-      return;
-    }
-
-    dispatch(setBoard(2));
-  };
+  const resizeClickHandler = useResizeSwitch(2);
 
   return (
     <Paper
@@ -50,7 +43,7 @@ export const CountriesList = () => {
         aria-label="delete"
         className={classes.resizeIcon}
         size="small"
-        onClick={(e) => resizeClickHandler(e)}
+        onClick={resizeClickHandler}
       >
         <FullscreenExitIcon fontSize="inherit" />
       </IconButton>

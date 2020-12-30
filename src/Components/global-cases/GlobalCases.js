@@ -1,22 +1,23 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
+
 import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import FullscreenExitIcon from "@material-ui/icons/FullscreenExit";
-import { setBoard, selectCurrentBoard } from "../../redux/currentBoardSlice";
+import { selectCurrentBoard } from "../../redux/currentBoardSlice";
 import {
   selectGlobalInfo,
   selectInfoLoader,
   selectInfoDate,
 } from "../../redux/covidInfoSlice";
+import { useResizeSwitch } from "../../hooks/useResizeSwitch";
 import Spinner from "../spinner";
 import IconMenuButton from "../menu-icon-button";
 import { useStyles } from "./styles";
 
 export const GlobalCases = () => {
-  const dispatch = useDispatch();
   const classes = useStyles();
   const currentBoard = useSelector(selectCurrentBoard);
   const isLoaded = useSelector(selectInfoLoader);
@@ -27,15 +28,7 @@ export const GlobalCases = () => {
   const parseDate = `${
     date.getMonth() + 1
   }/${date.getDate()}/${date.getFullYear()}`;
-
-  const resizeClickHandler = () => {
-    if (currentBoard === 1) {
-      dispatch(setBoard(0));
-      return;
-    }
-
-    dispatch(setBoard(1));
-  };
+  const resizeClickHandler = useResizeSwitch(1);
 
   return (
     <Paper
@@ -47,7 +40,7 @@ export const GlobalCases = () => {
         aria-label="delete"
         className={classes.resizeIcon}
         size="small"
-        onClick={(e) => resizeClickHandler(e)}
+        onClick={resizeClickHandler}
       >
         <FullscreenExitIcon fontSize="inherit" />
       </IconButton>

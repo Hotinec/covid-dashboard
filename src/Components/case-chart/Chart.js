@@ -4,8 +4,7 @@ import Chart from "chart.js";
 export class ChartView extends React.Component {
   constructor(props) {
     super(props);
-    const { reference } = this.props;
-    this.canvasRef = reference;
+    this.canvasRef = React.createRef();
   }
 
   componentDidMount() {

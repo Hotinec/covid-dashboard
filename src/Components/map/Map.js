@@ -23,8 +23,9 @@ import {
   selectInfoLoader,
   selectCountryById,
 } from "../../redux/covidInfoSlice";
+import { useResizeSwitch } from "../../hooks/useResizeSwitch";
 
-import { selectCurrentBoard, setBoard } from "../../redux/currentBoardSlice";
+import { selectCurrentBoard } from "../../redux/currentBoardSlice";
 
 import { selectParameter } from "../../redux/parameterSlice";
 
@@ -47,6 +48,7 @@ export const Map = () => {
     longitude: 0,
     zoom: 1,
   });
+  const resizeClickHandler = useResizeSwitch(3);
 
   const resizeListener = useCallback(() => {
     setViewport({
@@ -96,15 +98,6 @@ export const Map = () => {
     }
   }, [currentCountryInfo]);
 
-  const resizeClickHandler = (e) => {
-    if (currentBoard === 3) {
-      dispatch(setBoard(0));
-      return;
-    }
-
-    dispatch(setBoard(3));
-  };
-
   return (
     <Paper
       className={`${classes.root} ${currentBoard === 3 ? classes.open : ""}`}
@@ -115,7 +108,7 @@ export const Map = () => {
         aria-label="delete"
         className={classes.resizeIcon}
         size="small"
-        onClick={(e) => resizeClickHandler(e)}
+        onClick={resizeClickHandler}
       >
         <FullscreenExitIcon fontSize="inherit" />
       </IconButton>
