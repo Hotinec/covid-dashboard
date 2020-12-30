@@ -77,6 +77,22 @@ export const filteredCountries = createSelector(
   }
 );
 
+export const markerSizeByCountries = createSelector(
+  selectAllCountries,
+  selectParameter,
+  (countries, parameter) => {
+    const filteredByParameter = filter(parameter, countries);
+    const counts = filteredByParameter.map((country) => country.Cases);
+    const maxCount = Math.max(...counts);
+    const minCount = Math.min(...counts);
+    const diff = maxCount - minCount;
+    return {
+      div: diff * 0.2,
+      div2: diff * 0.8,
+    };
+  }
+);
+
 export const filteredQueryCountries = createSelector(
   selectAllCountries,
   selectSearch,

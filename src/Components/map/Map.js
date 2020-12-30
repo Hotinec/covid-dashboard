@@ -18,6 +18,7 @@ import {
   getCurrentCountryInfo,
 } from "../../redux/currentCountrySlice";
 import {
+  markerSizeByCountries,
   filteredCountries,
   selectInfoLoader,
   selectCountryById,
@@ -72,13 +73,6 @@ export const Map = () => {
   const currentParametr = useSelector(selectParameter);
   const currentCountry = useSelector(selectCurrentCountry);
   const currentCountryInfo = useSelector(getCurrentCountryInfo);
-
-  const counts = countries.map((country) => country.Cases);
-  const maxCount = Math.max(...counts);
-  const minCount = Math.min(...counts);
-  const diff = maxCount - minCount;
-  const div = diff * 0.2;
-  const div2 = diff * 0.8;
 
   const colors = [
     { name: "weak", color: "rgba(5, 155, 247, 0.7)" },
@@ -137,10 +131,13 @@ export const Map = () => {
             {countries.map((country) => {
               let size = 15;
               let { color } = colors[0];
-              if (country.Cases >= div2) {
+              if (country.Cases >= markerSizeByCountries.div2) {
                 size = 55;
                 color = colors[2].color;
-              } else if (country.Cases < div2 && country.Cases >= div) {
+              } else if (
+                country.Cases < markerSizeByCountries.div2 &&
+                country.Cases >= markerSizeByCountries.div
+              ) {
                 size = 35;
                 color = colors[1].color;
               }
