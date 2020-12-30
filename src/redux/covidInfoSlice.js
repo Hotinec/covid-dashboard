@@ -37,8 +37,6 @@ const covidInfoSlice = createSlice({
       countriesAdapter.upsertMany(state, payload.Countries);
     });
     builder.addCase(fetchCovidInfo.rejected, (state, action) => {
-      // eslint-disable-next-line no-console
-      console.log(action.error);
       if (state.loading === "idle") {
         state.loading = "pending";
       }
