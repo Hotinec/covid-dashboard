@@ -6,6 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import FullscreenExitIcon from "@material-ui/icons/FullscreenExit";
 import { setBoard, selectCurrentBoard } from "../../redux/currentBoardSlice";
+import { selectGlobalInfo } from "../../redux/covidInfoSlice";
 import Spinner from "../spinner";
 import IconMenuButton from "../menu-icon-button";
 import { useStyles } from "./styles";
@@ -16,9 +17,7 @@ export const GlobalCases = () => {
   const currentBoard = useSelector(selectCurrentBoard);
   const isLoaded = useSelector((state) => state.covidInfo.loading);
   const dateValue = useSelector((state) => state.covidInfo.Date);
-  const globalCases = useSelector(
-    (state) => state.covidInfo.Global.TotalConfirmed
-  );
+  const globalCases = useSelector(selectGlobalInfo).TotalConfirmed;
 
   const date = new Date(dateValue);
   const parseDate = `${
