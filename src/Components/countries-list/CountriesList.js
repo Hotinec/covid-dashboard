@@ -22,6 +22,8 @@ import IconMenuButton from "../menu-icon-button";
 
 import { useStyles } from "./styles";
 
+const ISLOADED = "idle";
+
 export const CountriesList = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
@@ -52,7 +54,7 @@ export const CountriesList = () => {
       >
         <FullscreenExitIcon fontSize="inherit" />
       </IconButton>
-      {isLoaded === "idle" ? (
+      {isLoaded === ISLOADED ? (
         <Box className={classes.wraper}>
           <Typography className={classes.title}>Cases by Country</Typography>
           <List className={classes.list}>
